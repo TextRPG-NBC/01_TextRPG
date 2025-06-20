@@ -1,10 +1,10 @@
-#include "GameManager.h"
+ï»¿#include "GameManager.h"
 // TODO: #include "Monster.h"
 // TODO : #include "BossMonster.h"
 // TODO : #include "Character.h"
 #include <random>
 
-/* ·£´ı ÀÏ¹İ ¸ó½ºÅÍ »ı¼º ÈÄ ¹İÈ¯ */
+/* ëœë¤ ì¼ë°˜ ëª¬ìŠ¤í„° ìƒì„± í›„ ë°˜í™˜ */
 Monster* GameManager::generateMonster(int level)
 {
 	int choice = dist(rng);
@@ -17,29 +17,29 @@ Monster* GameManager::generateMonster(int level)
 		case MONSTER_TYPE_TROLL:
 			return new Troll(level);
 		default:
-			return new Goblin(level); // ±âº»°ªÀ¸·Î °íºí¸° ¹İÈ¯
+			return new Goblin(level); // ê¸°ë³¸ê°’ìœ¼ë¡œ ê³ ë¸”ë¦° ë°˜í™˜
 	}
 }
 
-/* º¸½º ¸ó½ºÅÍ »ı¼º ÈÄ ¹İÈ¯ */
+/* ë³´ìŠ¤ ëª¬ìŠ¤í„° ìƒì„± í›„ ë°˜í™˜ */
 BossMonster* GameManager::generateBossMonster(int level)
 {
 
 }
 
-/* ¸ó½ºÅÍ VS ÇÃ·¹ÀÌ¾î ÀüÅõ½ÃÀÛ */
+/* ëª¬ìŠ¤í„° VS í”Œë ˆì´ì–´ ì „íˆ¬ì‹œì‘ */
 void GameManager::battle(Character* player)
 {
 
 }
 
-/* ÇÃ·¹ÀÌ¾î°¡ »óÁ¡À» ¹æ¹®ÇßÀ» ¶§ÀÇ Çàµ¿ Á¤ÀÇ */
+/* í”Œë ˆì´ì–´ê°€ ìƒì ì„ ë°©ë¬¸í–ˆì„ ë•Œì˜ í–‰ë™ ì •ì˜ */
 void GameManager::visitShop(Character* player)
 {
 
 }
 
-/* ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Ç¥½Ã */
+/* í”Œë ˆì´ì–´ ì¸ë²¤í† ë¦¬ í‘œì‹œ */
 void GameManager::displayInventory(Character* player)
 {
 
