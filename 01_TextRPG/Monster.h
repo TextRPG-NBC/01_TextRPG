@@ -6,7 +6,7 @@ using namespace std;
 
 class Item;
 
-class Monster 
+class Monster abstract
 {
 
 public:

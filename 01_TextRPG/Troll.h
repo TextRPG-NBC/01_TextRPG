@@ -10,6 +10,7 @@ private:
 	int attack;
 
 public:
+	Troll(int level);
 	string getName() override;
 	int getHealth() override;
 	int getAttack() override;
