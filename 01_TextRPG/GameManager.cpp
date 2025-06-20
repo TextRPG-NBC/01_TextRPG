@@ -1,6 +1,5 @@
 ﻿#include "GameManager.h"
 // TODO: #include "Monster.h"
-// TODO : #include "BossMonster.h"
 // TODO : #include "Character.h"
 #include <random>
 
@@ -24,7 +23,7 @@ Monster* GameManager::generateMonster(int level)
 /* 보스 몬스터 생성 후 반환 */
 BossMonster* GameManager::generateBossMonster(int level)
 {
-
+	return new BossMonster(level);
 }
 
 /* 몬스터 VS 플레이어 전투시작 */
