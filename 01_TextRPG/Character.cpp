@@ -168,19 +168,20 @@ Character* Character::decreaseMaxHealthBoost(int amount)
 
 Character* Character::increaseGold(int amount)
 {
-	setGold(gold + amount);
 	std::cout << name << "가 " << amount << " 골드를 얻었습니다." << std::endl;
+	setGold(gold + amount);
 	return instance.get();
 }
 
-Character* Character::operator<<(int gold)
-{
-	increaseGold(gold);
-}
+// 포인터에 바로 사용할 수 없어서 삭제 대기. *(Character::getinstance()) << 처럼 사용하면 사용할 수 있지만 번거러움.
+//Character* Character::operator<<(int gold)
+//{
+//	return increaseGold(gold);
+//}
 
 Character* Character::decreaseGold(int amount)
 {
-	std::cout << name << "가 " << amount << " 골드가 줄었습니다." << std::endl;
+	std::cout << name << "의 " << amount << " 골드가 줄었습니다." << std::endl;
 	setGold(gold - amount);
 	return instance.get();
 }
@@ -241,10 +242,11 @@ Character* Character::addItemToInventory(std::unique_ptr<IItem> item)
 	return instance.get();
 }
 
-Character* Character::operator<<(std::unique_ptr<IItem> item)
-{
-	addItemToInventory(std::move(item));
-}
+// 포인터에 바로 사용할 수 없어서 삭제 대기. *(Character::getinstance()) << 처럼 사용하면 사용할 수 있지만 번거러움.
+//Character* Character::operator<<(std::unique_ptr<IItem> item)
+//{
+//	return addItemToInventory(std::move(item));
+//}
 
 Character* Character::equipWeapon(std::unique_ptr<Weapon> weapon)
 {
