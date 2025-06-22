@@ -27,19 +27,14 @@ class Item;
 class GameManager
 {
 private:
-	std::mt19937 rng;	// Random number generator
-	std::uniform_int_distribution<int> monsterDist;	// Random Monster(0 ~ MONSTER_TYPE_COUNT)
-	std::uniform_int_distribution<int> goldDist;	// Random Gold(10 ~ 20)
-	std::uniform_int_distribution<int> itemDist;	// Random Item(0 ~ ITEM_TYPE_COUNT)
-	std::uniform_int_distribution<int> basicDist;	// Random Gold(0 ~ 99)
 
 public:
 	/* Constructor */
-	GameManager() : rng(std::random_device{}()), monsterDist(0, MONSTER_TYPE_COUNT-1), goldDist(10, 20), itemDist(0, ITEM_TYPE_COUNT-1), basicDist(0, 99) {}
+	GameManager(){}
 	
 	/* member methods */
-	Monster* generateMonster(int level);
-	BossMonster* generateBossMonster(int level);
+	std::unique_ptr<Monster> generateMonster(int level);
+	std::unique_ptr<Monster> generateBossMonster(int level);	// generate Monster에 다 넣으면 안되나? 10레벨 되면 자동생성인데;;
 	void battle(Character* player);
 	void visitShop(Character* player);
 	void displayInventory(Character* player);
