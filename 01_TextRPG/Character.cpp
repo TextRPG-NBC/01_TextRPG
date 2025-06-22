@@ -12,7 +12,7 @@ Character* Character::getInstance()
 {
 	if(!instance)
 	{
-		instance.reset(new Character("레오니다스 1세", 1));
+		instance.reset(new Character("플레이어", 1));
 		// instance = std::make_unique<Character>("레오니다스 1세", 1);
 		// 위와 같이 작성할 경우 생성자를 Private에 두었을 때 에러가 발생하는데 이유를 모르겠음.
 		// 때문에 instance.reset() 을 사용함.
@@ -95,7 +95,11 @@ Character* Character::increaseExperience(int amount)
 
 Character* Character::recovery(int amount)
 {
-	std::cout << name << "가 " << amount << "만큼 회복했습니다." << std::endl;
+	if (health+amount > maxHealth)
+	{
+		amount = maxHealth - health;
+	}
+	std::cout << name << "가 체력을 " << amount << "만큼 회복했습니다." << std::endl;
 	setHealth(health + amount);
 	return instance.get();
 }
@@ -115,6 +119,10 @@ Character* Character::attackToMonster(IMonster* target)
 
 Character* Character::takeDamage(int amount)
 {
+	if (amount > health)
+	{
+		amount = health;
+	}
 	std::cout << name << "가 " << amount << "만큼 피해를 입었습니다." << std::endl;
 	setHealth(health - amount);
 	return instance.get();
@@ -173,12 +181,6 @@ Character* Character::increaseGold(int amount)
 	return instance.get();
 }
 
-// 포인터에 바로 사용할 수 없어서 삭제 대기. *(Character::getinstance()) << 처럼 사용하면 사용할 수 있지만 번거러움.
-//Character* Character::operator<<(int gold)
-//{
-//	return increaseGold(gold);
-//}
-
 Character* Character::decreaseGold(int amount)
 {
 	std::cout << name << "의 " << amount << " 골드가 줄었습니다." << std::endl;
@@ -204,6 +206,11 @@ Character* Character::displayInventory() const
 	return instance.get();
 }
 
+IItem* Character::getInventoryItem(int index) const
+{
+	return inventory.at(index).get();
+}
+
 Character* Character::useItemFromInventory(int index)
 {
 	using namespace std;
@@ -213,9 +220,15 @@ Character* Character::useItemFromInventory(int index)
 		return instance.get();
 	}
 	
+	std::cout << inventory.at(index)->getName() << "을(를) 사용했습니다." << std::endl;
 	inventory.at(index)->use(this);
 	removeItemFromInventory(index);
 	return instance.get();
+}
+
+Character* Character::useILastIndexItemFromInventory()
+{
+	return useItemFromInventory(getInventoryLength()-1);
 }
 
 int Character::getInventoryLength()
@@ -242,11 +255,19 @@ Character* Character::addItemToInventory(std::unique_ptr<IItem> item)
 	return instance.get();
 }
 
-// 포인터에 바로 사용할 수 없어서 삭제 대기. *(Character::getinstance()) << 처럼 사용하면 사용할 수 있지만 번거러움.
-//Character* Character::operator<<(std::unique_ptr<IItem> item)
-//{
-//	return addItemToInventory(std::move(item));
-//}
+Character* Character::useItem(std::unique_ptr<IItem> item)
+{
+	if (!item) 
+	{
+		std::cout << "사용 불가능한 아이템입니다." << std::endl;
+		return this;
+	}
+	auto myItem = std::move(item);
+	std::cout << myItem->getName() << "을(를) 사용했습니다." << std::endl;
+	myItem->use(this);
+	
+	return this;
+}
 
 Character* Character::equipWeapon(std::unique_ptr<Weapon> weapon)
 {
@@ -323,6 +344,16 @@ Character* Character::unEquipArmor()
 	}
 
 
+}
+
+const Weapon* Character::getEquipedWeapon() const
+{
+	return equipedWeapon.get();
+}
+
+const Armor* Character::getEquipedArmor() const
+{
+	return equipedArmor.get();
 }
 
 // ================ 프라이빗 함수 ( 싱글톤을 위해 숨겨진 생성자 및 헬퍼 함수) ================

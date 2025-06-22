@@ -7,7 +7,7 @@ Armor::Armor(const std::string& name, int maxHealthBonus, int price)
 
 void Armor::use(Character* character)
 {
-    std::unique_ptr<Armor> copyArmor = std::make_unique<Armor>(getName(), getMaxHealthBonus());
+    std::unique_ptr<Armor> copyArmor = std::make_unique<Armor>(getName(), getMaxHealthBonus(),getPrice());
     character->equipArmor(std::move(copyArmor));
 }
 

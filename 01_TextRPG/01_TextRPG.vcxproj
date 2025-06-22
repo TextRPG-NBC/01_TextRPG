@@ -129,17 +129,20 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CriticalBoost.cpp" />
     <ClCompile Include="HealthPotion.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="MaxHealthBoost.cpp" />
+    <ClCompile Include="SItem.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Armor.h" />
     <ClInclude Include="AttackBoost.h" />
     <ClInclude Include="Character.h" />
-    <ClInclude Include="CharacterUtils.h" />
+    <ClInclude Include="SCharacter.h" />
     <ClInclude Include="CriticalBoost.h" />
     <ClInclude Include="HealthPotion.h" />
     <ClInclude Include="IItem.h" />
+    <ClInclude Include="SItem.h" />
     <ClInclude Include="MaxHealthBoost.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>

@@ -1,20 +1,27 @@
-﻿// 사용안내
+﻿
+// *** 캐릭터 사용안내 ***
+
 // 캐릭터 클래스는 싱글톤으로 구현되었기 때문에 따로 인스턴스를 만들 수 없음.
 // Charcter::getInstance()->함수이름() 과 같이 사용.
-// 또는 #include "CharacterUtils.h" 이후 hero()->함수이름() 과 같이 사용.
-// 
-// 아이템은 std::make_unqiue<IItem 상속클래스> 로 생성해서 추가해야함. 너무 길어서 CharacterUtils.h 에서 makeWeapon, makeHealthPotion 등등 제공.
-// 현재 생성 가능한 아이템은 Weapon, Armor, HealthPotion, AttackBoost, CriticalBoost, HealthBoost 이며 
-// IItem은 인터페이스 클래스이므로 생성시 오류 발생.
-// 
-// 아이템 생성 예시)
-// auto smallHealthPotion = makeHealthPotion("소형 생명력 물약", 20); // auto 를 사용하지 않는 경우 std::unique_ptr<HealthPotion> 으로 받아야함.
-// hero()->addItemToInventory(std::move(smallHealthPotion));
-// hero()->addItemToInventory(makeHealthPotion("대형 생명력 물약", 50)); // 이렇게 바로 추가하는게 가장 간단.
-// 
-// 아이템 사용 예시)
-// Character::getInstance()->useItemFromInventory(인벤토리 슬롯 번호);
-// Character::getInstance()->removeItemFromInventory(인벤토리 슬롯 번호);
+// 또는 #include "SCharacter.h" 이후 sc()->함수이름() 과 같이 사용.
+
+// 전투)
+// sc()->attackToMonster(goblin);
+// goblin측의 공격함수에서 sc()->takeDamage(고블린의 공격력);
+ 
+// 인벤토리에 아이템 추가)
+// auto smallHealthPotion = makeHealthPotion("소형 생명력 물약", 20, 5); 
+// auto 를 사용하지 않는 경우 std::unique_ptr<HealthPotion> 으로 받아야함.
+// sc()->addItemToInventory(std::move(smallHealthPotion));
+// sc()->addItemToInventory(makeHealthPotion("대형 생명력 물약", 50, 10)); // 임시객체는 move필요없이 바로 추가 가능.
+
+// 인벤토리의 아이템 사용)
+// sc()->displayInventory();
+// sc()->useItemFromInventory(인벤토리 슬롯 번호);
+// sc()->removeItemFromInventory(인벤토리 슬롯 번호);
+
+// 인벤토리를 통하지 않고 바로 아이템 사용)
+// sc()->useItem(makeCriticalBoost("하급 민첩성 영약",5,7);
 
 // 플레이어 캐릭터는 사망 상태에 이르고 getIsDead() 함수로 이를 나타내지만 그 상태에 따른 동작제한은 하지않음. 
 // 게임매니저에서 게임 종료처리 해주길 기대함.
@@ -66,21 +73,26 @@ public:
 	// 골드 설정. 상점시스템에 활용하기 위함.
 	Character* increaseGold(int amount);
 	Character* decreaseGold(int amount);
-	Character* operator<<(int gold);
 
 	// 인벤토리 함수들.
 	Character* displayInventory() const;
+	IItem* getInventoryItem(int index) const;
+
 	Character* addItemToInventory(std::unique_ptr<IItem> item);
-	Character* operator<<(std::unique_ptr<IItem> item);
 	Character* removeItemFromInventory(int index);
 	Character* useItemFromInventory(int index);
+	Character* useILastIndexItemFromInventory();
 	int getInventoryLength();
 
+	// 인벤토리를 거치지 않고 바로 아이템을 사용.
+	Character* useItem(std::unique_ptr<IItem> item);
 	Character* equipWeapon(std::unique_ptr<Weapon> weapon);
 	Character* unEquipWeapon();
 	Character* equipArmor(std::unique_ptr<Armor> armor);
 	Character* unEquipArmor();
 
+	const Weapon* getEquipedWeapon() const;
+	const Armor* getEquipedArmor() const;
 	
 
 private:

@@ -10,7 +10,7 @@ Weapon::Weapon(const std::string& name, int attackBonus, int criticalBonus, int 
 
 void Weapon::use(Character* character)
 {
-	std::unique_ptr<Weapon> copyWeapon = std::make_unique<Weapon>(getName(), getAtttackBonus());
+	std::unique_ptr<Weapon> copyWeapon = std::make_unique<Weapon>(getName(), getAtttackBonus(),getCriticalBonus(),getPrice());
 	character->equipWeapon(std::move(copyWeapon));
 }
 
