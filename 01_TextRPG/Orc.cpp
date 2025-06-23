@@ -1,18 +1,14 @@
 ﻿#include "Orc.h"
-#include <random>
+#include "RandomUtil.h"
+#include <iostream>
 
 Orc::Orc(int level)
 {
     name = "Orc";
+    health = RandomUtil::getInt(level * 20, level * 30);
+    attack = RandomUtil::getInt(level * 5, level * 10);
 
-    static std::random_device rd;
-    static std::mt19937 gen(rd());
-
-    std::uniform_int_distribution<> healthDist(level * 20, level * 30);
-    std::uniform_int_distribution<> attackDist(level * 5, level * 10);
-
-    health = healthDist(gen);
-    attack = attackDist(gen);
+    std::cout << "몬스터 " << name << " 등장! " << "체력 : " << health << ", 공격력 : " << attack << std::endl;
 }
 
 string Orc::getName()
