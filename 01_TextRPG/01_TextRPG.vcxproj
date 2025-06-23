@@ -126,6 +126,8 @@
   <ItemGroup>
     <ClCompile Include="BossMonster.cpp" />
     <ClCompile Include="Goblin.cpp" />
+    <ClCompile Include="Constants.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Orc.cpp" />
     <ClCompile Include="Troll.cpp" />
@@ -155,6 +157,11 @@
     <ClInclude Include="SItem.h" />
     <ClInclude Include="MaxHealthBoost.h" />
     <ClInclude Include="Weapon.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="RandomUtil.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
