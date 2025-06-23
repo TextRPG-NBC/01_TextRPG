@@ -1,4 +1,5 @@
-﻿#include "AttackBoost.h"
+﻿#include<memory>
+#include"AttackBoost.h"
 #include"Character.h"
 
 AttackBoost::AttackBoost(const std::string& name, int boostAmount, int price)
@@ -20,6 +21,11 @@ std::string AttackBoost::getName() const
 int AttackBoost::getPrice() const
 {
 	return price;
+}
+
+std::unique_ptr<IItem> AttackBoost::clone() const
+{
+	return std::make_unique<AttackBoost>(getName(), getBoostAmount(), getPrice());
 }
 
 int AttackBoost::getBoostAmount() const

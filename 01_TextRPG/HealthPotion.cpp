@@ -1,8 +1,8 @@
-﻿#include "HealthPotion.h"
-#include "Character.h"
+﻿#include<memory>
+#include"HealthPotion.h"
+#include"Character.h"
 
-#include<iostream>
-HealthPotion::HealthPotion(const std::string name, int healAmount,int price)
+HealthPotion::HealthPotion(const std::string& name, int healAmount,int price)
     : name(name), healAmount(healAmount), price(price)
 {
 }
@@ -21,6 +21,12 @@ int HealthPotion::getPrice() const
 {
     return price;
 }
+
+std::unique_ptr<IItem> HealthPotion::clone() const
+{
+    return std::make_unique<HealthPotion>(getName(), getHealAmount(), getPrice());
+}
+
 
 int HealthPotion::getHealAmount() const
 {

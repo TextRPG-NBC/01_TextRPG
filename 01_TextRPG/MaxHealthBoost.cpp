@@ -1,8 +1,9 @@
-﻿#include "MaxHealthBoost.h"
+﻿#include<memory>
+#include"MaxHealthBoost.h"
 #include"Character.h"
 
 MaxHealthBoost::MaxHealthBoost(const std::string& name, int boostAmount,int price)
-	:name(name),boostAmount(boostAmount),price(price)
+	:boostAmount(boostAmount),price(price)
 {
 }
 
@@ -20,6 +21,12 @@ int MaxHealthBoost::getPrice() const
 {
 	return price;
 }
+
+std::unique_ptr<IItem> MaxHealthBoost::clone() const
+{
+	return std::make_unique<MaxHealthBoost>(getName(), getBoostAmount(), getPrice());
+}
+
 
 int MaxHealthBoost::getBoostAmount() const
 {

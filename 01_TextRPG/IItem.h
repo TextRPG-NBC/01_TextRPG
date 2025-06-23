@@ -1,6 +1,6 @@
 ﻿
 // *** 아이템 사용안내 ***
-// 아이템은 기본적으로는 std::make_unqiue<IItem 상속클래스> 로 생성해서 추가함.
+// 아이템은 기본적으로는 std::make_unique<IItem 상속클래스> 로 생성해서 추가함.
 // 너무 길어서 Items.h 에서 makeWeapon, makeHealthPotion 등등 제공.
 // 현재 생성 가능한 아이템은 Weapon, Armor, HealthPotion, AttackBoost, CriticalBoost, HealthBoost 이며 
 // IItem은 인터페이스 클래스이므로 생성할 수 없음.
@@ -15,7 +15,8 @@
 
 #pragma once
 
-#include <string>
+#include<string>
+#include<memory>
 
 class Character;
 class IItem
@@ -25,6 +26,7 @@ public:
 
 	virtual std::string getName() const = 0;
 	virtual int getPrice() const = 0;
+	virtual std::unique_ptr<IItem> clone() const = 0;
 
 	virtual ~IItem() = default;
 };

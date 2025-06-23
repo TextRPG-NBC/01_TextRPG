@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <string>
+#include<string>
 #include"IItem.h"
 
 class Character;
@@ -13,6 +13,7 @@ public:
 
 	virtual std::string getName() const override;
 	virtual int getPrice() const override;
+	virtual std::unique_ptr<IItem> clone() const override;
 
 	int getBoostAmount()const;
 

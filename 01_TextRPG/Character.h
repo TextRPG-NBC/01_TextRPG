@@ -2,7 +2,7 @@
 // *** 캐릭터 사용안내 ***
 
 // 캐릭터 클래스는 싱글톤으로 구현되었기 때문에 따로 인스턴스를 만들 수 없음.
-// Charcter::getInstance()->함수이름() 과 같이 사용.
+// Character::getInstance()->함수이름() 과 같이 사용.
 // 또는 #include "SCharacter.h" 이후 sc()->함수이름() 과 같이 사용.
 
 // 전투)
@@ -27,9 +27,9 @@
 // 게임매니저에서 게임 종료처리 해주길 기대함.
 
 #pragma once
-#include <string>
-#include <vector>
-#include <memory>
+#include<string>
+#include<vector>
+#include<memory>
 
 class IItem;
 class Weapon;

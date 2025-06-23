@@ -1,4 +1,5 @@
-﻿#include "Armor.h"
+﻿#include<memory>
+#include"Armor.h"
 #include"Character.h"
 Armor::Armor(const std::string& name, int maxHealthBonus, int price)
     :name(name), maxHealthBonus(maxHealthBonus),price(price)
@@ -19,6 +20,11 @@ std::string Armor::getName() const
 int Armor::getPrice() const
 {
     return price;
+}
+
+std::unique_ptr<IItem> Armor::clone() const
+{
+    return std::make_unique<Armor>(getName(), getMaxHealthBonus(), getPrice());
 }
 
 int Armor::getMaxHealthBonus() const

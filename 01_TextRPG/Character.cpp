@@ -1,4 +1,4 @@
-﻿#include "Character.h"
+﻿#include"Character.h"
 #include"IItem.h"
 #include"Weapon.h"
 #include"Armor.h"
@@ -281,7 +281,7 @@ Character* Character::equipWeapon(std::unique_ptr<Weapon> weapon)
 	equipedWeapon = std::move(weapon);
 	std::cout << name << "가 " << equipedWeapon->getName() << "을(를) 장착했습니다." << std::endl;
 	calculateStat();
-	std::cout << name << "의 공격력이 " << equipedWeapon->getAtttackBonus() << " 증가했습니다." << std::endl;
+	std::cout << name << "의 공격력이 " << equipedWeapon->getAttackBonus() << " 증가했습니다." << std::endl;
 	std::cout << name << "의 치명타율이 " << equipedWeapon->getCriticalBonus() << " 증가했습니다." << std::endl;
 
 	return instance.get();
@@ -293,7 +293,7 @@ Character* Character::unEquipWeapon()
 	{
 		std::cout << name << "가 " << equipedWeapon->getName() << "을(를) 탈착했습니다." << std::endl;
 
-		std::cout << name << "의 공격력이 " << equipedWeapon->getAtttackBonus() << " 감소했습니다." << std::endl;
+		std::cout << name << "의 공격력이 " << equipedWeapon->getAttackBonus() << " 감소했습니다." << std::endl;
 		std::cout << name << "의 치명타율이 " << equipedWeapon->getCriticalBonus() << " 감소했습니다." << std::endl;
 
 		addItemToInventory(std::move(equipedWeapon));
@@ -390,7 +390,7 @@ void Character::calculateStat()
 	// 장비에 의한 설정.
 	if (equipedWeapon)
 	{
-		attack += equipedWeapon->getAtttackBonus();
+		attack += equipedWeapon->getAttackBonus();
 		criticalProbability += equipedWeapon->getCriticalBonus();
 	}
 	if (equipedArmor)

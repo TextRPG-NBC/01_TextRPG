@@ -48,12 +48,6 @@
     <ClCompile Include="MaxHealthBoost.cpp">
       <Filter>소스 파일\Item</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="SItem.cpp">
-      <Filter>소스 파일\Item</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IItem.h">

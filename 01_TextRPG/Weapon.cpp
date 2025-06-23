@@ -1,7 +1,7 @@
-﻿#include "Weapon.h"
+﻿#include<memory>
+#include"Weapon.h"
 #include"Character.h"
-#include<memory>
-#include <iostream>
+
 Weapon::Weapon(const std::string& name, int attackBonus, int criticalBonus, int price)
 	:name(name), attackBonus(attackBonus),criticalBonus(criticalBonus),price(price)
 {
@@ -10,7 +10,7 @@ Weapon::Weapon(const std::string& name, int attackBonus, int criticalBonus, int 
 
 void Weapon::use(Character* character)
 {
-	std::unique_ptr<Weapon> copyWeapon = std::make_unique<Weapon>(getName(), getAtttackBonus(),getCriticalBonus(),getPrice());
+	std::unique_ptr<Weapon> copyWeapon = std::make_unique<Weapon>(getName(), getAttackBonus(),getCriticalBonus(),getPrice());
 	character->equipWeapon(std::move(copyWeapon));
 }
 
@@ -24,8 +24,12 @@ int Weapon::getPrice() const
 	return price;
 }
 
+std::unique_ptr<IItem> Weapon::clone() const
+{
+	return std::make_unique<Weapon>(getName(), getAttackBonus(), getCriticalBonus(), getPrice());
+}
 
-int Weapon::getAtttackBonus() const
+int Weapon::getAttackBonus() const
 {
 	return attackBonus;
 }
