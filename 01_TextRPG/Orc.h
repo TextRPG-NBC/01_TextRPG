@@ -8,6 +8,7 @@ private:
 	string name;
 	int health;
 	int attack;
+	unique_ptr<IItem> item;
 
 public:
 	Orc(int level);
@@ -15,5 +16,5 @@ public:
 	int getHealth() override;
 	int getAttack() override;
 	void takeDamage(int damage) override;
-	Item* dropItem() override;
+	unique_ptr<IItem> dropItem() override;
 };

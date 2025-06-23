@@ -1,14 +1,17 @@
 ﻿#include "Goblin.h"
 #include "RandomUtil.h"
 #include <iostream>
+#include "IItem.h"
+#include "ItemManager.h"
 
 Goblin::Goblin(int level)
 {
     name = "Goblin";
     health = RandomUtil::getInt(level * 20, level * 30);
 	attack = RandomUtil::getInt(level * 5, level * 10);
+    item = ItemManager::getInstance()->getRandomItem(level);
 
-	std::cout << "몬스터 " << name << " 등장! " << "체력 : " << health << ", 공격력 : " << attack << std::endl;
+	cout << "몬스터 " << name << " 등장! " << "체력 : " << health << ", 공격력 : " << attack << std::endl;
 }
 
 string Goblin::getName()
@@ -36,7 +39,8 @@ void Goblin::takeDamage(int damage)
     }
 }
 
-Item* Goblin::dropItem()
+unique_ptr<IItem> Goblin::dropItem()
 {
-    return nullptr;
+	cout << name << "이(가) " << item->getName() << " 아이템을 드랍했습니다" << endl;
+    return move(item);
 }
