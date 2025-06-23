@@ -130,6 +130,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Orc.cpp" />
+    <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Troll.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +138,7 @@
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Orc.h" />
+    <ClInclude Include="Shop.h" />
     <ClInclude Include="Troll.h" />
     <ClCompile Include="Armor.cpp" />
     <ClCompile Include="AttackBoost.cpp" />
