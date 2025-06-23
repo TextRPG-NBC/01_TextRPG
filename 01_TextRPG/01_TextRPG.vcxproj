@@ -102,6 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,6 +136,25 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Orc.h" />
     <ClInclude Include="Troll.h" />
+    <ClCompile Include="Armor.cpp" />
+    <ClCompile Include="AttackBoost.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CriticalBoost.cpp" />
+    <ClCompile Include="HealthPotion.cpp" />
+    <ClCompile Include="MaxHealthBoost.cpp" />
+    <ClCompile Include="Weapon.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Armor.h" />
+    <ClInclude Include="AttackBoost.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="SCharacter.h" />
+    <ClInclude Include="CriticalBoost.h" />
+    <ClInclude Include="HealthPotion.h" />
+    <ClInclude Include="IItem.h" />
+    <ClInclude Include="SItem.h" />
+    <ClInclude Include="MaxHealthBoost.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
