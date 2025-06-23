@@ -129,7 +129,6 @@
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="ItemManager.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Orc.cpp" />
     <ClCompile Include="Troll.cpp" />
   </ItemGroup>
