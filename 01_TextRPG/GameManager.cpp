@@ -1,13 +1,16 @@
 ﻿#include "GameManager.h"
 #include "Constants.h"
 #include "RandomUtil.h"
-// TODO: #include "Monster.h"
-// TODO: #include "Character.h"
+#include "Character.h"
 #include <random>
 #include <iostream>
 #include <algorithm>
 #include <string>
 #include <memory>
+#include "Goblin.h"
+#include "Orc.h"
+#include "Troll.h"
+#include "BossMonster.h"
 
 /* 랜덤 일반 몬스터 생성, 반환(unique_ptr) */
 std::unique_ptr<Monster> GameManager::generateMonster(int level)
@@ -33,26 +36,7 @@ std::unique_ptr<Monster> GameManager::generateBossMonster(int level)
 	return std::make_unique<BossMonster>(level);
 }
 
-Item* GameManager::dropRandomItem()
-{
-	// TODO: Monster.dropItem 을 호출할 듯? (삭제예정)
-	Item* item == nullptr;
-	int itemChoice = itemDist(rng);
-	switch (static_cast<ItemType>(itemChoice))
-	{
-		case ITEM_TYPE_HealthPotion:
-			item = new HealthPotion();
-			break;
-		case ITEM_TYPE_AttackBoost:
-			item = new AttackBoost();
-			break;
-		case ITEM_TYPE_CriticalBoost:
-			item = new CriticalBoost();
-			break;
-	}
-	return item;
-}
-
+/* y or n 입력 */
 char GameManager::inputYorN(const std::string& prompt = "Y 또는 N을 입력하세요 : ")
 {
 	std::string answer;
@@ -134,19 +118,20 @@ void GameManager::battle(Character* player)
 			myPlayer->useItemFromInventory(RandomUtil::getInt(0, myPlayer->getInventoryLength() - 1));
 		}
 
-		int playerDamage = player->getAttackDamage();	// TODO: 치명타 확률까지 계산한 최종 공격 데미지 반환하는 함수 제작
+		int playerDamage = 10; /* player->getAttackDamage();*/	// TODO: 치명타 확률까지 계산한 최종 공격 데미지 반환하는 함수 제작
 		newMonster->takeDamage(playerDamage);
-		printf("%s 이/가 %s 을/를 공격합니다! (데미지 %d) ▶ ", myPlayer->getName().c_str(), newMonster->getName().c_str, playerDamage);
+		printf("%s 이/가 %s 을/를 공격합니다! (데미지 %d) ▶ ", myPlayer->getName().c_str(), newMonster->getName().c_str(), playerDamage);
 		if (newMonster->getHealth() <= 0)				// monster쪽에서 0 이하로 체력 깎이는거 방지해서 == 0으로 해도 무방
 		{
 			printf("%s 처치!\n", newMonster->getName().c_str());
 			myPlayer->increaseExperience(50 /*WIN_EXP*/);
-			int randomGold = myPlayer->increaseGold(RandomUtil::getInt(10, 20/*WIN_GOLD_MIN, WIN_GOLD_MAX*/));
+			int randomGold = RandomUtil::getInt(10, 20/*WIN_GOLD_MIN, WIN_GOLD_MAX*/);
+			myPlayer->increaseGold(randomGold);
 			printf("전투에서 승리했습니다! EXP(+%d)와 골드(+%d)를 획득했습니다.", 50/*WIN_EXP*/, randomGold);
 			printf("현재 레벨 : %d(%d/100), 골드 : %d\n", myPlayer->getLevel(), myPlayer->getExperience(), myPlayer->getGold());
 			if (RandomUtil::getInt(0, 99) < 30)
 			{
-				myPlayer->AddItemToInventory(newMonster->dropItem());	// TODO: dropItem으로 *Item 반환, AddItemToInventory는 void로 해도 될거같은데
+				//myPlayer->addItemToInventory(newMonster->dropItem());	// TODO: dropItem으로 *Item 반환, AddItemToInventory는 void로 해도 될거같은데
 			}
 			break;
 		}
@@ -160,7 +145,6 @@ void GameManager::battle(Character* player)
 		{
 			printf("%s 체력 : %d → 0\n", myPlayer->getName().c_str(), beforePlayerHP);
 			printf("%s 이/가 사망했습니다. 게임오버!\n", myPlayer->getName().c_str());
-			myPlayer->isDead = true;	// TODO: setIsDead 함수 추가해서 상태 바꾸기
 			break;
 		}
 		printf("%s 체력 : %d\n", myPlayer->getName().c_str(), myPlayer->getHealth());
@@ -191,7 +175,7 @@ void GameManager::visitShop(Character* player)
 	myPlayer->displayInventory();
 
 	// 2. 상점 목록 display
-	GamaManger::displayShopItems(); // TODO: 만들기
+	//GamaManger::displayShopItems(); // TODO: 만들기
 	
 	// 무한반복, 메뉴(1 : 아이템 구매, 2: 아이템 판매, 3: 상점 나가기)
 	
@@ -205,10 +189,6 @@ void GameManager::visitShop(Character* player)
 	// TODO: 아이템 판매(보유한 아이템을 골드로 판매(구입 원가의 60%가격), 판매된 아이템은 인벤토리에서 제거)
 }
 
-/* 플레이어 인벤토리 표시 : 이거 필요없는거같은데? character에 붙이기 (삭제예정) */
-void GameManager::displayInventory(Character* player)
-{
-}
 
 /**
  * 1. 싱글톤, unique_ptr 쓰는건?
