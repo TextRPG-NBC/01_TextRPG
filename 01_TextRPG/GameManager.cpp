@@ -81,6 +81,7 @@ void GameManager::run()
 	if (!player->getIsDead())
 	{
 		std::cout << "게임 클리어!\n";
+		return;
 	}
 	std::cout << player->getName() << "가 사망했습니다. 게임 오버!\n";
 }

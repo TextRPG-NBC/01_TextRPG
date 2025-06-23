@@ -7,10 +7,10 @@ class Monster;
 class GameManager
 {
 private:
-
+	std::unique_ptr<Shop> shop;
 public:
 	/* Constructor */
-	GameManager(){}
+	GameManager() : shop(std::make_unique<Shop>()){}
 	
 	/* member methods */
 	std::unique_ptr<Monster> generateMonster(int level);
