@@ -75,6 +75,9 @@
     <ClCompile Include="Troll.cpp">
       <Filter>소스 파일\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IItem.h">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="Troll.h">
       <Filter>헤더 파일\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
