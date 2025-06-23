@@ -128,6 +128,7 @@
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Orc.cpp" />
     <ClCompile Include="Troll.cpp" />
@@ -135,6 +136,7 @@
   <ItemGroup>
     <ClInclude Include="BossMonster.h" />
     <ClInclude Include="Goblin.h" />
+    <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Orc.h" />
     <ClInclude Include="Troll.h" />

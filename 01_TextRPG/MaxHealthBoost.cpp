@@ -3,7 +3,7 @@
 #include"Character.h"
 
 MaxHealthBoost::MaxHealthBoost(const std::string& name, int boostAmount,int price)
-	:boostAmount(boostAmount),price(price)
+	:name(name),boostAmount(boostAmount),price(price)
 {
 }
 

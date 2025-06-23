@@ -4,6 +4,12 @@
 #include"Armor.h"
 #include <iostream>
 
+#include "AttackBoost.h"
+#include "CriticalBoost.h"
+#include "HealthPotion.h"
+#include "MaxHealthBoost.h"
+#include "RandomUtil.h"
+
 std::unique_ptr<Character> Character::instance = nullptr;
 
 // ================ 퍼블릭 함수 ================
@@ -78,6 +84,19 @@ Character* Character::displayStatus() const
 	cout << "소지금: " << gold << " 골드" << endl;
 
 	return instance.get();
+}
+
+int Character::getAttackDamage() const
+{
+	int damage=attack;
+
+	int randomInt = RandomUtil::getInt(1, 100);
+	if (randomInt <= criticalProbability)
+	{
+		damage *= 2;
+	}
+
+	return damage;
 }
 
 Character* Character::increaseExperience(int amount)
@@ -229,6 +248,48 @@ Character* Character::useItemFromInventory(int index)
 Character* Character::useILastIndexItemFromInventory()
 {
 	return useItemFromInventory(getInventoryLength()-1);
+}
+
+Character* Character::useRandomCostItemFromInventory()
+{
+	// 컨슘 아이템 클래스로 따로 뺀다면 편하게 구현할 수 있지만
+	// 그냥 아이템 클래스 개선없이 구현.
+	if (inventory.empty())
+	{
+		std::cout << "인벤토리에 사용할 수 있는 아이템이 없습니다." << std::endl;
+		return instance.get();
+	}
+
+	std::vector<int> consumeItemIndexList;
+	for (int i = 0; i < inventory.size(); i++)
+	{
+		if (dynamic_cast<AttackBoost*>(inventory[i].get()) != nullptr)
+		{
+			consumeItemIndexList.push_back(i);
+		}
+		else if (dynamic_cast<CriticalBoost*>(inventory[i].get()) != nullptr)
+		{
+			consumeItemIndexList.push_back(i);
+		}
+		else if (dynamic_cast<MaxHealthBoost*>(inventory[i].get()) != nullptr)
+		{
+			consumeItemIndexList.push_back(i);
+		}
+		else if (dynamic_cast<HealthPotion*>(inventory[i].get()) != nullptr)
+		{
+			consumeItemIndexList.push_back(i);
+		}
+	}
+
+	if (consumeItemIndexList.empty())
+	{
+		std::cout << "인벤토리에 사용할 수 있는 아이템이 없습니다." << std::endl;
+		return instance.get();
+	}
+	
+	int randomNumber = RandomUtil::getInt(0,consumeItemIndexList.size()-1);
+	useItemFromInventory(randomNumber);
+	return instance.get();
 }
 
 int Character::getInventoryLength()

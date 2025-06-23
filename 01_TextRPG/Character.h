@@ -52,6 +52,7 @@ public:
 	bool getIsDead() const;
 	int getGold() const;
 	Character* displayStatus() const;
+	int getAttackDamage() const;
 	
 
 	// 전투 시스템에서 실질적으로 변하는 값을 설정하는 함수들.
@@ -82,6 +83,7 @@ public:
 	Character* removeItemFromInventory(int index);
 	Character* useItemFromInventory(int index);
 	Character* useILastIndexItemFromInventory();
+	Character* useRandomCostItemFromInventory();
 	int getInventoryLength();
 
 	// 인벤토리를 거치지 않고 바로 아이템을 사용.
