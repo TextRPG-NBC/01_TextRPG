@@ -2,7 +2,7 @@
 #include "Constants.h"
 #include "RandomUtil.h"
 // TODO: #include "Monster.h"
-// TODO : #include "Character.h"
+// TODO: #include "Character.h"
 #include <random>
 #include <iostream>
 #include <algorithm>
@@ -35,7 +35,7 @@ std::unique_ptr<Monster> GameManager::generateBossMonster(int level)
 
 Item* GameManager::dropRandomItem()
 {
-	// TODO : 아이템 드랍 로직 구현
+	// TODO: Monster.dropItem 을 호출할 듯? (삭제예정)
 	Item* item == nullptr;
 	int itemChoice = itemDist(rng);
 	switch (static_cast<ItemType>(itemChoice))
@@ -134,7 +134,7 @@ void GameManager::battle(Character* player)
 			myPlayer->useItemFromInventory(RandomUtil::getInt(0, myPlayer->getInventoryLength() - 1));
 		}
 
-		int playerDamage = player->getAttackDamage();	// TODO : 치명타 확률까지 계산한 최종 공격 데미지 반환하는 함수 제작
+		int playerDamage = player->getAttackDamage();	// TODO: 치명타 확률까지 계산한 최종 공격 데미지 반환하는 함수 제작
 		newMonster->takeDamage(playerDamage);
 		printf("%s 이/가 %s 을/를 공격합니다! (데미지 %d) ▶ ", myPlayer->getName().c_str(), newMonster->getName().c_str, playerDamage);
 		if (newMonster->getHealth() <= 0)				// monster쪽에서 0 이하로 체력 깎이는거 방지해서 == 0으로 해도 무방
@@ -146,7 +146,7 @@ void GameManager::battle(Character* player)
 			printf("현재 레벨 : %d(%d/100), 골드 : %d\n", myPlayer->getLevel(), myPlayer->getExperience(), myPlayer->getGold());
 			if (RandomUtil::getInt(0, 99) < 30)
 			{
-				myPlayer->AddItemToInventory(newMonster->dropItem());	// TODO : dropItem으로 *Item 반환, AddItemToInventory는 void로 해도 될거같은데
+				myPlayer->AddItemToInventory(newMonster->dropItem());	// TODO: dropItem으로 *Item 반환, AddItemToInventory는 void로 해도 될거같은데
 			}
 			break;
 		}
@@ -183,9 +183,20 @@ void GameManager::battle(Character* player)
 /* 플레이어가 상점을 방문했을 때의 행동 정의 */
 void GameManager::visitShop(Character* player)
 {
+	// 0. 캐릭터 싱글톤 받아오기
+	Character* myPlayer = Character::getInstance();
+
 	// 1. 캐릭터 Inventory, Gold, stat 표시
+	myPlayer->displayStatus();
+	myPlayer->displayInventory();
+
 	// 2. 상점 목록 display
-	// 3. 아이템 구매 (골드 차감, 인벤토리 추가)
+	GamaManger::displayShopItems(); // TODO: 만들기
+	
+	// 무한반복, 메뉴(1 : 아이템 구매, 2: 아이템 판매, 3: 상점 나가기)
+	
+	// 3. 아이템 구매 (구매 가능여부 판단, 골드 차감, 인벤토리 추가)
+	
 	// 4. 아이템 판매 (골드 증가, 인벤토리 삭제)
 	
 	// TODO: 인벤토리 표시
@@ -194,7 +205,14 @@ void GameManager::visitShop(Character* player)
 	// TODO: 아이템 판매(보유한 아이템을 골드로 판매(구입 원가의 60%가격), 판매된 아이템은 인벤토리에서 제거)
 }
 
-/* 플레이어 인벤토리 표시 : 이거 필요없는거같은데? character에 붙이기 */
+/* 플레이어 인벤토리 표시 : 이거 필요없는거같은데? character에 붙이기 (삭제예정) */
 void GameManager::displayInventory(Character* player)
 {
 }
+
+/**
+ * 1. 싱글톤, unique_ptr 쓰는건?
+ * 2. vector<unique_ptr<Weapon>> 은 어떤가?
+ * 3. 
+ * 
+ */
