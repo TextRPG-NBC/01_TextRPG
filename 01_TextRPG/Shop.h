@@ -1,13 +1,13 @@
 ﻿#pragma once
 #include <vector>
 #include <memory>
-#include "Item.h"
+#include "IItem.h"
 
 class Player;
 
 class Shop {
 private:
-	std::vector<std::unique_ptr<Item>> stock;
+	std::vector<std::unique_ptr<IItem>> stock;
 public:
 	Shop();
 	void ShowItems() const;

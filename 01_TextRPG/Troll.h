@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Monster.h"
+#include <memory>
 
 class Troll : public Monster
 {

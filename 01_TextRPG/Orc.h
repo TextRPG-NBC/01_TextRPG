@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include "Monster.h"
+#include "IItem.h"
+#include <memory>
 
 class Orc : public Monster
 {
