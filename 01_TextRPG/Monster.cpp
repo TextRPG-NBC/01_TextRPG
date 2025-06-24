@@ -25,15 +25,22 @@ std::unique_ptr<Item> Monster::dropItem()
 	std::cout << "[아이템 드랍] " << name << "으로부터 ";
 
 	int probability = RandomUtil::getInt(1, 100);
-	if (probability <= 50)			// TODO: Constants
-	{	// 50% 확률로 HP 포션을 드랍함
-		std::cout << "HP 포션을 획득했습니다\n";
-		return std::move(std::make_unique<HP_Potion>());
-	}
-	else if (probability <= 100)	// TODO: Constants;
-	{	// 50% 확률로 Attack Boost 포션을 드랍함
+
+	if (probability <= 25)	// TODO: Constants;
+	{	// 25% 확률로 Attack Boost 포션을 드랍함
 		std::cout << "힘의 영약을 획득했습니다\n";
 		return std::move(std::make_unique<AttackBoost>());
+	}
+	else if (probability <= 50)			// TODO: Constants
+	{	// 25% 확률로 치명타 증가 물약을 드랍함
+		std::cout << "치명타 증가 물약을 획득했습니다\n";
+		return std::move(std::make_unique<CriticalBoost>());
+	}
+	else if (probability <= 100)
+	{
+		// 50% 확률로 HP 포션을 드랍함
+		std::cout << "HP 포션을 획득했습니다\n";
+		return std::move(std::make_unique<HP_Potion>());
 	}
 }
 
