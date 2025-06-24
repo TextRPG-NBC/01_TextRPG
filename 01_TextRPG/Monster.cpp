@@ -17,13 +17,15 @@ void Monster::takeDamage(int damage)
 
 void Monster::attackPlayer(Player& player)
 {
-	std::cout << "[피격] " << name << "이(가) " << player.getName() << "을(를) 공격합니다! " << player.getName() << " 체력: " << player.getCurrentHP() << "\n";
+	std::cout << "[피격] : \"" << name << "\"이(가) \"" << player.getName() << "\"을(를) 공격합니다!(데미지: " << attack << ") → "
+		<< player.getName() << " 체력(" << player.getCurrentHP();
 	player.takeDamage(attack);
+	std::cout << " → " << player.getCurrentHP() << ") / " << player.getMaxHP() << "\n";
 }
 
 std::unique_ptr<Item> Monster::dropItem()
 {
-	std::cout << "[아이템 드랍] " << name << "으로부터 ";
+	std::cout << "[아이템 드랍] : " << name << "(으)로부터 ";
 
 	int probability = RandomUtil::getInt(1, 100);
 
@@ -39,12 +41,12 @@ std::unique_ptr<Item> Monster::dropItem()
 		std::cout << "가죽갑옷을 획득했습니다\n";
 		return std::move(std::make_unique<LeatherArmor>());
 	}
-	else if (probability <= 40)	// TODO: Constants;
+	else if (probability <= 40)	
 	{	// 20% 확률로 Attack Boost 포션을 드랍함
 		std::cout << "힘의 영약을 획득했습니다\n";
 		return std::move(std::make_unique<AttackBoost>());
 	}
-	else if (probability <= 60)			// TODO: Constants
+	else if (probability <= 60)			
 	{	// 20% 확률로 치명타 증가 물약을 드랍함
 		std::cout << "치명타 증가 물약을 획득했습니다\n";
 		return std::move(std::make_unique<CriticalBoost>());
@@ -68,9 +70,14 @@ std::string Monster::getName() const
 	return name;
 }
 
-int Monster::getHP() const
+int Monster::getCurHP() const
 {
 	return curHP;
+}
+
+int Monster::getMaxHP() const
+{
+	return maxHP;
 }
 
 int Monster::getLevel() const
@@ -79,26 +86,34 @@ int Monster::getLevel() const
 }
 
 /* 몬스터 종류별 생성자 */
-Goblin::Goblin(int playerLevel)				// TODO: Constants
-	:Monster("고블린", playerLevel, playerLevel * RandomUtil::getInt(20, 30), playerLevel * RandomUtil::getInt(5, 10), false)
+Goblin::Goblin(int playerLevel)				
+	:Monster("고블린", playerLevel, 
+		playerLevel * RandomUtil::getInt(Constants::NM_MIN_HP_RATE, Constants::NM_MAX_HP_RATE),
+		playerLevel * RandomUtil::getInt(Constants::NM_MIN_ATK_RATE, Constants::NM_MIN_ATK_RATE), false)
 {
-	std::cout << "몬스터 "<< name << " 등장! 체력: " << curHP << ", 공격력 : " << attack << "\n";	// TODO: 제안사항대로 출력
+	std::cout << "[몬스터 생성] : \""<< name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
 }
 
-Orc::Orc(int playerLevel)					// TODO: Constants
-	:Monster("오크", playerLevel, playerLevel* RandomUtil::getInt(20, 30), playerLevel* RandomUtil::getInt(5, 10), false) 
+Orc::Orc(int playerLevel)					
+	:Monster("오크", playerLevel,
+		playerLevel* RandomUtil::getInt(Constants::NM_MIN_HP_RATE, Constants::NM_MAX_HP_RATE),
+		playerLevel* RandomUtil::getInt(Constants::NM_MIN_ATK_RATE, Constants::NM_MIN_ATK_RATE), false)
 {
-	std::cout << "몬스터 " << name << " 등장! 체력: " << curHP << ", 공격력 : " << attack << "\n";			// TODO: 제안사항대로 출력
+	std::cout << "[몬스터 생성] : \"" << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
 }
 
-Troll::Troll(int playerLevel)				// TODO: Constants
-	:Monster("트롤", playerLevel, playerLevel* RandomUtil::getInt(20, 30), playerLevel* RandomUtil::getInt(5, 10), false) 
+Troll::Troll(int playerLevel)
+	:Monster("트롤", playerLevel,
+		playerLevel* RandomUtil::getInt(Constants::NM_MIN_HP_RATE, Constants::NM_MAX_HP_RATE),
+		playerLevel* RandomUtil::getInt(Constants::NM_MIN_ATK_RATE, Constants::NM_MIN_ATK_RATE), false)
 {
-	std::cout << "몬스터 " << name << " 등장! 체력: " << curHP << ", 공격력 : " << attack << "\n";			// TODO: 제안사항대로 출력
+	std::cout << "[몬스터 생성] : \"" << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
 }
 
-BossMonster::BossMonster(int playerLevel)	// TODO: Constants
-	:Monster("드래곤", playerLevel, playerLevel* RandomUtil::getInt(30, 45), playerLevel* RandomUtil::getInt(8, 15), true)
+BossMonster::BossMonster(int playerLevel)	
+	:Monster("드래곤", playerLevel, 
+		playerLevel* RandomUtil::getInt(Constants::BS_MIN_HP_RATE, Constants::BS_MAX_HP_RATE),
+		playerLevel* RandomUtil::getInt(Constants::BS_MIN_ATK_RATE, Constants::BS_MIN_ATK_RATE), true)
 {
-	std::cout << "보스 몬스터 " << name << " 등장! 체력: " << curHP << ", 공격력 : " << attack << "\n";			// TODO: 제안사항대로 출력
+	std::cout << "[보스 몬스터 생성] : \"" << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
 }

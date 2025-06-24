@@ -59,5 +59,3 @@ public:
 	bool use(Player& player) override;
 	bool isConsumable() const override { return true; }
 };
-
-// TODO: 무기/ 방어구 아이템 구현 + 장착 + player 멤버변수 추가

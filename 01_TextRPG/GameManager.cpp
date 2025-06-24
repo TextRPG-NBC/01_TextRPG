@@ -14,9 +14,7 @@ GameManager::GameManager() : shop(std::make_unique<Shop>()), isClear(false) {}
 
 void GameManager::run()
 {
-	std::string playerName;
-	std::cout << "▶ 플레이어를 생성합니다. 이름을 입력하세요: ";
-	std::getline(std::cin, playerName);
+	std::string playerName = InputUtil::getStr("▶ 플레이어를 생성합니다. 이름을 입력하세요: ");
 	Player& player = Player::getInstance(playerName);
 
 	while (player.isAlive())
@@ -24,8 +22,11 @@ void GameManager::run()
 		player.showStatus();
 
 		battle();
+		player.resetTempAbility();		// 전투 후 버프 초기화
+
 		if (isClear || !player.isAlive()) break;
 
+		player.showStatus();
 		char shopChoice = InputUtil::getYorN("▶ 상점에 방문하시겠습니까? (Y/N): ");
 		if (shopChoice == 'Y')	visitShop();
 
@@ -34,27 +35,28 @@ void GameManager::run()
 
 	if (!player.isAlive())
 	{
-		std::cout << player.getName() << "(이)가 사망했습니다. 게임오버!\n";
+		std::cout << "[전투패배] : \"" << player.getName() << "\"이(가) 사망했습니다. 게임오버!\n";
 	}
-	else if (isClear)
-	{
-		// 게임클리어
-	}
-	else
-	{
-		std::cout << "[FOR DEBUG] Default : 게임을 종료합니다\n";
-	}
+	//else if (isClear)
+	//{
+	//	// 게임클리어
+	//}
+	//else
+	//{
+	//	//// std::cout << "[FOR DEBUG] Default : 게임을 종료합니다\n";
+	//}
+	std::cout << "[게임종료] : ... 게임을 종료합니다 ...\n";
 }
 
 void GameManager::battle()
 {
-	std::cout << "\n[전투를 시작합니다]\n";
+	std::cout << "\n▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼[전투를 시작합니다]▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼\n";
 	system("pause");
 	
 	Player& player = Player::getInstance();
 	std::unique_ptr<Monster> monster = generateMonster(player.getLevel());
 
-	player.resetTempAbility();		// 버프 초기화
+	
 
 	if (player.hasConsumable() && RandomUtil::getInt(1, 100) <= Constants::P_USE_ITEM)
 	{
@@ -71,22 +73,22 @@ void GameManager::battle()
 	if (!player.isAlive()) return;	// 플레이어 사망시
 	if (monster->isBossMonster())	// 보스몬스터 처치시
 	{
-		std::cout << "축하합니다. 보스 몬스터 [" << monster->getName() << "](을)를 처치하고 게임을 클리어했습니다!\n";
+		std::cout << "[★ 게임 클리어 ★] : 축하합니다. 보스 몬스터 \"" << monster->getName() << "\"을(를) 처치하고 게임을 클리어했습니다!\n";
 		isClear = true;
 		return;
 	}
-
+	
 	int randomGold = RandomUtil::getInt(Constants::MIN_DROP_GOLD, Constants::MAX_DROP_GOLD);	// 10 ~ 20
 	player.addExp(Constants::DROP_EXP);		// 50
 	player.addGold(randomGold);
-	std::cout << monster->getName() << " 처치!";
-	std::cout << player.getName() << "(이)가 EXP(+50), 골드(+" << randomGold << ")를 획득했습니다.(레벨: " << player.getLevel() << "(" << player.getExp() << "/100), 골드: " << player.getGold() << ")\n";
+	std::cout << "[전투 승리] : " << monster->getName() << " 처치!\n";
+	std::cout << " ☞ " << player.getName() << "이(가) EXP(+50), 골드(+" << randomGold << ")를 획득했습니다.(레벨: " << player.getLevel() << ", EXP(" << player.getExp() << "/100), 골드: " << player.getGold() << ")\n";
 
 	if (RandomUtil::getInt(1, 100) <= Constants::P_DROP_ITEM)	// 30
 	{
 		player.addItem(monster->dropItem());
 	}
-	std::cout << "[전투를 종료합니다]\n\n";
+	std::cout << "\n▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲[전투를 종료합니다]▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲\n";
 }
 
 void GameManager::visitShop()
@@ -116,7 +118,7 @@ void GameManager::visitShop()
 		}
 		else
 		{
-			std::cout << "잘못된 입력입니다. 다시 시도해주세요.\n\n";
+			std::cout << "잘못된 입력입니다. 메뉴의 숫자를 입력해주세요.\n\n";
 		}
 	}
 }
@@ -142,7 +144,7 @@ void GameManager::openInventory()
 		player.useItemUsingIndex(inventoryChoice - 1);
 	}
 	else {
-		std::cout << "잘못된 입력입니다. \n";
+		std::cout << "잘못된 입력입니다. 아이템의 숫자를 입력해주세요.\n";
 	}
 
 }

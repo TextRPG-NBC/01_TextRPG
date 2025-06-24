@@ -9,7 +9,8 @@ class Player;
 class TreeBranch : public Item, public IWeapon
 {
 public:
-    TreeBranch() : Item(4,"나뭇가지","공격력을 5증가시킨다",15){}
+    TreeBranch() : Item(Constants::TREE_BRANCH, "나뭇가지",
+        "공격력을 5증가시킨다", Constants::PRICE_TREE_BRANCH){}
     bool use(Player& player) override;
     bool isConsumable() const override { return false; }
     virtual std::unique_ptr<Item> clone() override;
@@ -20,7 +21,8 @@ public:
 class LeatherArmor : public Item, public IArmor
 {
 public:
-    LeatherArmor() : Item(5,"가죽갑옷","최대체력을 10증가시킨다",15){}
+    LeatherArmor() : Item(Constants::LEATHER_ARMOR, "가죽갑옷",
+        "최대체력을 10증가시킨다", Constants::PRICE_LEATHER_ARMOR){}
     bool use(Player& player) override;
     bool isConsumable() const override { return false; }
     virtual std::unique_ptr<Item> clone() override;
