@@ -29,4 +29,13 @@ namespace PrintUtil {
 		std::cout << "|                                |\n";
 		std::cout << "===================================\n";
 	}
+
+	inline void clearScreen()
+	{
+#ifdef _WIN32
+		system("cls");
+#else
+		system("clear");
+#endif
+	}
 }

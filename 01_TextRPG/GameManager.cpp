@@ -30,7 +30,7 @@ void GameManager::run()
 		player.showStatus();
 		char shopChoice = InputUtil::getYorN("▶ 상점에 방문하시겠습니까? (Y/N): ");
 		if (shopChoice == 'Y')	visitShop();
-		system("cls");
+		PrintUtil::clearScreen();
 
 	}
 
@@ -75,7 +75,7 @@ void GameManager::battle()
 	if (!player.isAlive()) return;	// 플레이어 사망시
 	if (monster->isBossMonster())	// 보스몬스터 처치시
 	{
-		std::cout << "[★ 게임 클리어 ★] : 축하합니다. 보스 몬스터 \"" << monster->getName() << "\"을(를) 처치하고 게임을 클리어했습니다!\n";
+		std::cout << "[ ★ 게임 클리어 ★ ] : 축하합니다. 보스 몬스터 \"" << monster->getName() << "\"을(를) 처치하고 게임을 클리어했습니다!\n";
 		isClear = true;
 		return;
 	}
@@ -95,11 +95,9 @@ void GameManager::battle()
 
 void GameManager::visitShop()
 {
-	/*system("cls");
-	std::cout << "[상점에 방문했습니다]\n";*/
 	while (true)
 	{
-		system("cls");
+		PrintUtil::clearScreen();
 		PrintUtil::printShopMenu();
 		int shopChoice = InputUtil::getInt("▶ 상점 메뉴를 선택해주세요: ");
 		if (shopChoice == Constants::EXIT)			// 0
@@ -108,17 +106,17 @@ void GameManager::visitShop()
 		}
 		else if (shopChoice == Constants::BUY)		// 1
 		{
-			system("cls");
+			PrintUtil::clearScreen();
 			shop->buy(Player::getInstance());	
 		}
 		else if (shopChoice == Constants::SELL)		// 2
 		{
-			system("cls");
+			PrintUtil::clearScreen();
 			shop->sell(Player::getInstance());	
 		}
 		else if (shopChoice == Constants::STATUS)	// 3
 		{	
-			system("cls");
+			PrintUtil::clearScreen();
 			openInventory();
 		}
 		else
@@ -146,7 +144,7 @@ void GameManager::openInventory()
 	{
 		return;
 	}
-	else if (inventoryChoice <= player.getInventory().size())
+	else if (1 <= inventoryChoice && inventoryChoice <= player.getInventory().size())
 	{
 		player.useItemUsingIndex(inventoryChoice - 1);
 		player.showStatus();
