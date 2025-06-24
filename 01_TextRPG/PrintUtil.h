@@ -24,7 +24,7 @@ namespace PrintUtil {
 		std::cout << "|                                |\n";
 		std::cout << "| " << Constants::BUY << ". 구매하기                    |\n";
 		std::cout << "| " << Constants::SELL << ". 판매하기                    | \n";
-		std::cout << "| " << Constants::STATUS << ". 상태조회                    |\n";
+		std::cout << "| " << Constants::STATUS << ". 인벤토리                    |\n";
 		std::cout << "| " << Constants::EXIT << ". 뒤로가기                    |\n";
 		std::cout << "|                                |\n";
 		std::cout << "===================================\n";

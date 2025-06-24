@@ -44,6 +44,7 @@ public:
 
 	void increaseAttack(int amount);
 	void increaseCriticalProbability(int amount);
+	void increaseCurrentHP(int amount);
 	void increaseMaxHP(int amount);
 
 	void decreaseAttack(int amount);
@@ -56,13 +57,15 @@ public:
 	void addTempAttack(int amount);
 	void addTempCriticalProbability(int amount);
 	void removeItemByIdx(int idx);
+	void displayInventory();
 	bool isAlive() const;
 	bool hasConsumable() const;
 	int getLevel() const;
 	int getGold() const;
 	int getExp() const;
-	std::string getName() const;
 	int getCurrentHP() const;
+	int getMaxHP() const;
+	std::string getName() const;
 	std::vector<std::unique_ptr<Item>>& getInventory();
 	
 	void equipWeapon(std::unique_ptr<Item> weapon);

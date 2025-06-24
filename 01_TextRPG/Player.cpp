@@ -71,7 +71,12 @@ void Player::useItem()
 
 void Player::useItemUsingIndex(int index)
 {
-	inventory[index]->use(*this);
+	bool isSuccess = inventory[index]->use(*this);
+	if (isSuccess)
+	{
+		inventory.erase(inventory.begin() + index);
+	}
+
 }
 
 void Player::attackMonster(Monster& monster)
@@ -113,6 +118,13 @@ void Player::increaseCriticalProbability(int amount)
 {
 	if (amount<0) return;
 	criticalProbability+=amount;
+}
+
+void Player::increaseCurrentHP(int amount)
+{
+	if (amount < 0)	return;
+	curHP += amount;
+	if (curHP > maxHP) curHP = maxHP;
 }
 
 void Player::increaseMaxHP(int amount)
@@ -183,6 +195,15 @@ void Player::removeItemByIdx(int idx)
 	inventory.erase(inventory.begin() + idx);
 }
 
+void Player::displayInventory()
+{
+	std::cout << "[FOR DEBUG : Player.cpp > displayInventory]\n";
+	for (size_t i = 0; i < inventory.size(); ++i)
+	{
+		std::cout << i+1 << ". " << inventory[i]->getName() << " : " << inventory[i]->getDescription() << "\n";
+	}
+}
+
 bool Player::isAlive() const 
 {
 	std::cout << "[FOR DEBUG : Player.cpp > isAlive]\n";
@@ -224,6 +245,11 @@ std::string Player::getName() const
 int Player::getCurrentHP() const
 {
 	return curHP;
+}
+
+int Player::getMaxHP() const
+{
+	return maxHP;
 }
 
 std::vector<std::unique_ptr<Item>>& Player::getInventory()

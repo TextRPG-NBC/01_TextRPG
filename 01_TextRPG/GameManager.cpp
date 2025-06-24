@@ -28,6 +28,8 @@ void GameManager::run()
 
 		char shopChoice = InputUtil::getYorN("▶ 상점에 방문하시겠습니까? (Y/N): ");
 		if (shopChoice == 'Y')	visitShop();
+
+
 	}
 
 	if (!player.isAlive())
@@ -110,13 +112,39 @@ void GameManager::visitShop()
 		}
 		else if (shopChoice == Constants::STATUS)	// 3
 		{	
-			Player::getInstance().showStatus();
+			openInventory();
 		}
 		else
 		{
 			std::cout << "잘못된 입력입니다. 다시 시도해주세요.\n\n";
 		}
 	}
+}
+
+void GameManager::openInventory()
+{
+	Player& player = Player::getInstance();
+	player.showStatus();
+	if (player.getInventory().empty())
+	{
+		std::cout << "인벤토리가 비어있습니다.\n";
+		return;
+	}
+	player.displayInventory();
+
+	int inventoryChoice = InputUtil::getInt("▶ 사용할 아이템 숫자를 입력해주세요(0: 취소): ");
+	if (inventoryChoice == 0)
+	{
+		return;
+	}
+	else if (inventoryChoice <= player.getInventory().size())
+	{
+		player.useItemUsingIndex(inventoryChoice - 1);
+	}
+	else {
+		std::cout << "잘못된 입력입니다. \n";
+	}
+
 }
 
 std::unique_ptr<Monster> GameManager::generateMonster(int playerLevel)
