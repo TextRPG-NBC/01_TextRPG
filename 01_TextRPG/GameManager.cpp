@@ -16,6 +16,7 @@ void GameManager::run()
 {
 	std::string playerName = InputUtil::getStr("▶ 플레이어를 생성합니다. 이름을 입력하세요: ");
 	Player& player = Player::getInstance(playerName);
+	
 
 	while (player.isAlive())
 	{
@@ -29,7 +30,7 @@ void GameManager::run()
 		player.showStatus();
 		char shopChoice = InputUtil::getYorN("▶ 상점에 방문하시겠습니까? (Y/N): ");
 		if (shopChoice == 'Y')	visitShop();
-
+		system("cls");
 
 	}
 
@@ -52,6 +53,7 @@ void GameManager::battle()
 {
 	std::cout << "\n▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼[전투를 시작합니다]▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼\n";
 	system("pause");
+	std::cout << "\n";
 	
 	Player& player = Player::getInstance();
 	std::unique_ptr<Monster> monster = generateMonster(player.getLevel());
@@ -82,43 +84,47 @@ void GameManager::battle()
 	player.addExp(Constants::DROP_EXP);		// 50
 	player.addGold(randomGold);
 	std::cout << "[전투 승리] : " << monster->getName() << " 처치!\n";
-	std::cout << " ☞ " << player.getName() << "이(가) EXP(+50), 골드(+" << randomGold << ")를 획득했습니다.(레벨: " << player.getLevel() << ", EXP(" << player.getExp() << "/100), 골드: " << player.getGold() << ")\n";
+	std::cout << " ☞ \"" << player.getName() << "\"이(가) EXP(+50), 골드(+" << randomGold << ")를 획득했습니다.(레벨: " << player.getLevel() << ", EXP(" << player.getExp() << "/100), 골드: " << player.getGold() << ")\n";
 
 	if (RandomUtil::getInt(1, 100) <= Constants::P_DROP_ITEM)	// 30
 	{
 		player.addItem(monster->dropItem());
 	}
-	std::cout << "\n▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲[전투를 종료합니다]▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲\n";
+	std::cout << "\n▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲[전투를 종료합니다]▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲\n\n";
 }
 
 void GameManager::visitShop()
 {
-	system("cls");
-	std::cout << "[상점에 방문했습니다]\n";
+	/*system("cls");
+	std::cout << "[상점에 방문했습니다]\n";*/
 	while (true)
 	{
+		system("cls");
 		PrintUtil::printShopMenu();
 		int shopChoice = InputUtil::getInt("▶ 상점 메뉴를 선택해주세요: ");
 		if (shopChoice == Constants::EXIT)			// 0
 		{
-			std::cout << "상점을 나갑니다.\n";
 			break;
 		}
 		else if (shopChoice == Constants::BUY)		// 1
 		{
+			system("cls");
 			shop->buy(Player::getInstance());	
 		}
 		else if (shopChoice == Constants::SELL)		// 2
 		{
+			system("cls");
 			shop->sell(Player::getInstance());	
 		}
 		else if (shopChoice == Constants::STATUS)	// 3
 		{	
+			system("cls");
 			openInventory();
 		}
 		else
 		{
 			std::cout << "잘못된 입력입니다. 메뉴의 숫자를 입력해주세요.\n\n";
+			system("pause");
 		}
 	}
 }
@@ -130,6 +136,7 @@ void GameManager::openInventory()
 	if (player.getInventory().empty())
 	{
 		std::cout << "인벤토리가 비어있습니다.\n";
+		system("pause");
 		return;
 	}
 	player.displayInventory();
@@ -142,9 +149,12 @@ void GameManager::openInventory()
 	else if (inventoryChoice <= player.getInventory().size())
 	{
 		player.useItemUsingIndex(inventoryChoice - 1);
+		player.showStatus();
+		system("pause");
 	}
 	else {
 		std::cout << "잘못된 입력입니다. 아이템의 숫자를 입력해주세요.\n";
+		system("pause");
 	}
 
 }

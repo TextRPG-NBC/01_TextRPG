@@ -62,8 +62,6 @@ namespace Constants {
 		LEVEL_ATK_RATE = 5,
 	};
 
-	//TODO: 보스 몬스터 타입
-
 	enum ItemType {
 		HP_POTION = 1,
 		ATTACK_BOOST = 2,

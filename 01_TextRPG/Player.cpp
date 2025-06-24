@@ -30,7 +30,7 @@ void Player::showStatus() const
 {
 	// std::cout << "[FOR DEBUG : Player.cpp > ShowStatus]\n";
 
-	std::cout << "\n\n\n-----------[플레이어 상태]------------\n";
+	std::cout << "\n-----------[플레이어 상태]------------\n";
 	std::cout << "| 이름: \"" << name << "\"  |  골드: " << gold 
 		<< "\n| 레벨: " << level << " (Exp: " << exp << "/100)  |  HP: "
 		<< curHP << "/" << maxHP;
@@ -181,14 +181,14 @@ void Player::addTempAttack(int amount)
 {
 	// std::cout << "[FOR DEBUG : Player.cpp > addTempAttack]\n";
 	tempAttackBuff += amount;
-	std::cout << "이번 전투동안 공격력이 +" << amount << " 증가했습니다!(공격력: " << attack + tempAttackBuff << ")\n";
+	std::cout << "공격력이 +" << amount << " 증가했습니다!(공격력: " << attack + tempAttackBuff << ")\n";
 }
 
 void Player::addTempCriticalProbability(int amount)
 {
 	// std::cout << "[FOR DEBUG : Player.cpp > addTempCriticalProbability]\n";
 	tempCriticalProbability += amount;
-	std::cout << "이번 전투동안 치명타 확률이 +" << amount << " 증가했습니다!(치명타 확률: " << criticalProbability + tempCriticalProbability << ")\n";
+	std::cout << "치명타 확률이 +" << amount << " 증가했습니다!(치명타 확률: " << criticalProbability + tempCriticalProbability << ")\n";
 }
 
 void Player::removeItemByIdx(int idx)
@@ -200,7 +200,7 @@ void Player::removeItemByIdx(int idx)
 void Player::displayInventory()
 {
 	// std::cout << "[FOR DEBUG : Player.cpp > displayInventory]\n";
-	std::cout << "\n\n\n---------------[ 보유 아이템 목록 ]-----------------\n|\n";
+	std::cout << "\n---------------[ 보유 아이템 목록 ]-----------------\n|\n";
 	for (size_t i = 0; i < inventory.size(); ++i)
 	{
 		std::cout << "| " << i + 1 << ". " << inventory[i]->getName() << " : " << inventory[i]->getDescription() << "\n";

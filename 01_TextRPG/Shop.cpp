@@ -18,7 +18,7 @@ Shop::Shop()
 void Shop::showItems() const
 {
 	// std::cout << "[FOR DEBUG : Shop.cpp > showItems]\n";
-	std::cout << "\n\n\n----------------[ 상점 아이템 목록 ]----------------\n|\n";
+	std::cout << "----------------[ 상점 아이템 목록 ]----------------\n|\n";
 	for (size_t i = 0; i < itemList.size(); ++i)
 	{
 		std::cout << "| " << i + 1 << ". " << itemList[i]->getName() << "(" <<
@@ -38,6 +38,7 @@ void Shop::buy(Player& player)
 	else if (choice > itemList.size())
 	{
 		std::cout << "올바른 번호를 입력해주세요.\n";
+		system("pause");
 		return;
 	}
 
@@ -45,6 +46,7 @@ void Shop::buy(Player& player)
 	if (player.getGold() < price)
 	{
 		std::cout << "보유 골드가 부족합니다.(소지금: " << player.getGold() << "골드)\n";
+		system("pause");
 		return;
 	}
 
@@ -71,6 +73,7 @@ void Shop::buy(Player& player)
 		player.addItem(std::make_unique<LeatherArmor>());
 	}
 	std::cout << "[아이템 구매] : \"" << itemList[choice - 1]->getName() << "\" 구매 완료(소지금: " << player.getGold() << ")\n";
+	system("pause");
 }
 
 void Shop::sell(Player& player)
@@ -79,10 +82,11 @@ void Shop::sell(Player& player)
 	if (inv.empty())
 	{
 		std::cout << "판매할 아이템이 없습니다.\n";
+		system("pause");
 		return;
 	}
 
-	std::cout << "\n\n\n---------------[ 보유 아이템 목록 ]-----------------\n|\n";
+	std::cout << "---------------[ 보유 아이템 목록 ]-----------------\n|\n";
 	for (size_t i = 0; i < inv.size(); ++i)
 	{
 		std::cout << "| " << i + 1 << ". " << inv[i]->getName() << "(" << inv[i]->getPrice() * Constants::SELL_RATE /*= 0.6*/
@@ -96,6 +100,7 @@ void Shop::sell(Player& player)
 	else if (choice > inv.size())
 	{
 		std::cout << "올바른 번호를 입력해주세요.\n";
+		system("pause");
 		return;
 	}
 
@@ -104,5 +109,6 @@ void Shop::sell(Player& player)
 	
 	std::cout << "[아이템 판매] \"" << inv[choice - 1]->getName() << "\" 판매 완료(소지금: " << player.getGold() << ")\n";
 	player.removeItemByIdx(choice - 1);
+	system("pause");
 }
 
