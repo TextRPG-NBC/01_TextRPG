@@ -55,7 +55,7 @@ std::unique_ptr<Item> Monster::dropItem()
 		std::cout << "HP 포션을 획득했습니다\n";
 		return std::move(std::make_unique<HP_Potion>());
 	}
-	return nullptr;
+	return nullptr;		//코드가 여기까지 오지 않지만 경고 방지용으로 추가
 }
 
 bool Monster::isAlive() const
