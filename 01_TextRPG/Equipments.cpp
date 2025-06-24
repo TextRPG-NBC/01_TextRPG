@@ -15,14 +15,14 @@ std::unique_ptr<Item> TreeBranch::clone()
 
 void TreeBranch::equipped(Player& player)
 {
-	player.increaseAttack(10);
-	player.increaseCriticalProbability(5);
+	player.increaseAttack(Constants::AB_TREE_BRANCH_ATK);
+	player.increaseCriticalProbability(Constants::AB_TREE_BRANCH_CRI);
 }
 
 void TreeBranch::unEquipped(Player& player)
 {
-	player.decreaseAttack(10);
-	player.decreaseCriticalProbability(5);
+	player.decreaseAttack(Constants::AB_TREE_BRANCH_ATK);
+	player.decreaseCriticalProbability(Constants::AB_TREE_BRANCH_CRI);
 }
 
 bool LeatherArmor::use(Player& player)
@@ -38,12 +38,12 @@ std::unique_ptr<Item> LeatherArmor::clone()
 
 void LeatherArmor::equipped(Player& player)
 {
-	player.increaseMaxHP(15);
-	player.increaseCurrentHP(15);
+	player.increaseMaxHP(Constants::AB_LEATHER_ARMOR);
+	player.increaseCurrentHP(Constants::AB_LEATHER_ARMOR);
 }
 
 void LeatherArmor::unEquipped(Player& player)
 {
-	player.decreaseMaxHP(15);
+	player.decreaseMaxHP(Constants::AB_LEATHER_ARMOR);
 }
 

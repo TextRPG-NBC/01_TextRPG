@@ -4,9 +4,28 @@
 
 // 사용법: int randInt = RandomUtil::getInt(1, 10);		// 1~10 사이의 난수 
 namespace InputUtil{
+	inline std::string getStr(const std::string& prompt = "문자열을 입력해주세요: ")
+	{
+		std::string input;
+		while(true)
+		{
+			std::cout << prompt;
+			std::getline(std::cin, input);
+
+			if (input.empty())	// 빈 입력 방지
+			{
+				std::cout << "입력이 비었습니다. 다시 입력하세요.\n";
+				continue;
+			}
+			break;
+		}
+		return input;
+	}
+
 	inline int getInt(const std::string& prompt = "숫자를 입력해주세요: ")
 	{
-		std::cout << "[FOR DEBUG : InputUtil > getInt ]\n";
+
+		// std::cout << "[FOR DEBUG : InputUtil > getInt ]\n";
 		int choice;
 		std::string input;
 		while(true)
@@ -39,7 +58,7 @@ namespace InputUtil{
 
 	inline char getYorN(const std::string& prompt = "Y 또는 N을 입력해주세요: ")
 	{
-		std::cout << "[FOR DEBUG : InputUtil > getYorN ]\n";
+		// std::cout << "[FOR DEBUG : InputUtil > getYorN ]\n";
 		std::string answer;
 		while (true)
 		{

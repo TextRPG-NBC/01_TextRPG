@@ -25,8 +25,9 @@ public:
 	bool isAlive() const;
 	bool isBossMonster() const { return isBoss; };
 	std::string getName() const;
-	int getHP() const;			// 사용한적 없음
-	int getLevel() const;		// 사용한적 없음
+	int getCurHP() const;			
+	int getMaxHP() const;
+	int getLevel() const;		
 };
 
 /* Derived Classes */

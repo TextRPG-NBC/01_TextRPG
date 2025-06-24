@@ -7,7 +7,7 @@
 
 Shop::Shop()
 {
-	std::cout << "[FOR DEBUG : Shop.cpp > Shop]\n";
+	// std::cout << "[FOR DEBUG : Shop.cpp > Shop]\n";
 	itemList.push_back(std::make_unique<HP_Potion>());
 	itemList.push_back(std::make_unique<AttackBoost>());
 	itemList.push_back(std::make_unique<CriticalBoost>());
@@ -17,8 +17,8 @@ Shop::Shop()
 
 void Shop::showItems() const
 {
-	std::cout << "[FOR DEBUG : Shop.cpp > showItems]\n";
-	std::cout << "\n----------------[ 상점 아이템 목록 ]----------------\n|\n";
+	// std::cout << "[FOR DEBUG : Shop.cpp > showItems]\n";
+	std::cout << "\n\n\n----------------[ 상점 아이템 목록 ]----------------\n|\n";
 	for (size_t i = 0; i < itemList.size(); ++i)
 	{
 		std::cout << "| " << i + 1 << ". " << itemList[i]->getName() << "(" <<
@@ -29,15 +29,15 @@ void Shop::showItems() const
 
 void Shop::buy(Player& player)
 {
-	std::cout << "[FOR DEBUG : Shop.cpp > buy]\n";
+	// std::cout << "[FOR DEBUG : Shop.cpp > buy]\n";
 	showItems();
-	std::cout << "소지금: " << player.getGold() << "골드)\n";
+	std::cout << "(소지금: " << player.getGold() << "골드)\n";
 	
 	int choice = InputUtil::getInt("▶ 구매할 아이템 번호(0: 취소): ");
 	if (choice == 0) return;
 	else if (choice > itemList.size())
 	{
-		std::cout << "존재하지 않는 아이템입니다.\n";
+		std::cout << "올바른 번호를 입력해주세요.\n";
 		return;
 	}
 
@@ -62,15 +62,15 @@ void Shop::buy(Player& player)
 	{
 		player.addItem(std::make_unique<CriticalBoost>());
 	}
-	else if (itemId == 4)
+	else if (itemId == Constants::TREE_BRANCH)
 	{
 		player.addItem(std::make_unique<TreeBranch>());
 	}
-	else if (itemId == 5)
+	else if (itemId == Constants::LEATHER_ARMOR)
 	{
 		player.addItem(std::make_unique<LeatherArmor>());
 	}
-	std::cout << "[" << itemList[choice - 1]->getName() << "] 구매 완료(소지금: " << player.getGold() << "\n";
+	std::cout << "[아이템 구매] : \"" << itemList[choice - 1]->getName() << "\" 구매 완료(소지금: " << player.getGold() << ")\n";
 }
 
 void Shop::sell(Player& player)
@@ -82,27 +82,27 @@ void Shop::sell(Player& player)
 		return;
 	}
 
-	std::cout << "\n--------------[ 보유 아이템 목록 ]----------------\n|\n";
+	std::cout << "\n\n\n---------------[ 보유 아이템 목록 ]-----------------\n|\n";
 	for (size_t i = 0; i < inv.size(); ++i)
 	{
 		std::cout << "| " << i + 1 << ". " << inv[i]->getName() << "(" << inv[i]->getPrice() * Constants::SELL_RATE /*= 0.6*/
 			<< "골드): " << inv[i]->getDescription() << "\n";
 	}
 	std::cout << "|\n----------------------------------------------------\n";
-	std::cout << "소지금: " << player.getGold() << "골드)\n";
+	std::cout << "(소지금: " << player.getGold() << "골드)\n";
 
 	int choice = InputUtil::getInt("▶ 판매할 아이템 번호(0: 취소): ");
 	if (choice == 0) return;
 	else if (choice > inv.size())
 	{
-		std::cout << "존재하지 않는 아이템입니다.\n";
+		std::cout << "올바른 번호를 입력해주세요.\n";
 		return;
 	}
 
 	int price = inv[choice - 1]->getPrice();
 	player.addGold(static_cast<int>(price * Constants::SELL_RATE));	// 0.6f
 	
-	std::cout << "[" << inv[choice - 1]->getName() << "] 판매 완료(소지금: " << player.getGold() << "\n";
+	std::cout << "[아이템 판매] \"" << inv[choice - 1]->getName() << "\" 판매 완료(소지금: " << player.getGold() << ")\n";
 	player.removeItemByIdx(choice - 1);
 }
 
