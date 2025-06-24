@@ -16,7 +16,7 @@ void Monster::takeDamage(int damage)
 
 void Monster::attackPlayer(Player& player)
 {
-	std::cout << "[피격] " << name << "이(가) " << player.getName() << "을(를) 공격합니다! " << player.getName() << " 체력: " << "\n"; // player.getCurrentHP() << "\n";
+	std::cout << "[피격] " << name << "이(가) " << player.getName() << "을(를) 공격합니다! " << player.getName() << " 체력: " << player.getCurrentHP() << "\n";
 	player.takeDamage(attack);
 }
 

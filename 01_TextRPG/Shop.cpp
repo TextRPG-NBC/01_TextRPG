@@ -28,7 +28,7 @@ void Shop::buy(Player& player)
 {
 	std::cout << "[FOR DEBUG : Shop.cpp > buy]\n";
 	showItems();
-	std::cout << "소지금: " << player.getGold() << "골드\n";
+	std::cout << "소지금: " << player.getGold() << "골드)\n";
 	
 	int choice = InputUtil::getInt("▶ 구매할 아이템 번호(0: 취소): ");
 	if (choice == 0) return;
@@ -78,7 +78,7 @@ void Shop::sell(Player& player)
 			<< "골드): " << inv[i]->getDescription() << "\n";
 	}
 	std::cout << "|\n----------------------------------------------------\n";
-	std::cout << "소지금: " << player.getGold() << "골드\n";
+	std::cout << "소지금: " << player.getGold() << "골드)\n";
 
 	int choice = InputUtil::getInt("▶ 판매할 아이템 번호(0: 취소): ");
 	if (choice == 0) return;
