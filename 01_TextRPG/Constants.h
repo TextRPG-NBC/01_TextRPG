@@ -49,4 +49,12 @@ namespace Constants {
 		CRITICAL_BOOST = 3,
 	};
 
+	enum ItemPrice {
+		PRICE_HP_POTION = 10,
+		PRICE_ATTACK_BOOST = 15,
+		PRICE_CRITICAL_BOOST = 15,
+	};
+
+	
+
 }

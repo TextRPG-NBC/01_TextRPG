@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <string>
+#include "Constants.h"
 
 class Player;
 
@@ -32,7 +33,7 @@ public:
 class HP_Potion : public Item 
 {
 public:
-	HP_Potion() : Item(1, "HP포션", "체력을 50 회복시키는 포션", 10) {}	// TODO: Constants
+	HP_Potion() : Item(Constants::HP_POTION, "HP포션", "체력을 50 회복시킵니다", Constants::PRICE_HP_POTION) {}
 	void use(Player& player) override;
 	bool isConsumable() const override { return true; }
 };
@@ -40,7 +41,7 @@ public:
 class AttackBoost : public Item
 {
 public:
-	AttackBoost() : Item(2, "힘의 영약", "공격력을 10 증가시킵니다", 15) {}	// TODO: Constants
+	AttackBoost() : Item(Constants::ATTACK_BOOST, "힘의 영약", "공격력을 10 증가시킵니다", Constants::PRICE_ATTACK_BOOST) {}
 	void use(Player& player) override;	
 	bool isConsumable() const override { return true; }
 };
@@ -48,7 +49,7 @@ public:
 class CriticalBoost : public Item
 {
 public:
-	CriticalBoost() : Item(3, "치명타 확률 영약", "치명타확률을 10 증가시킵니다", 15) {}	// TODO: Constants
+	CriticalBoost() : Item(Constants::CRITICAL_BOOST, "치명타 확률 영약", "치명타확률을 10 증가시킵니다", Constants::PRICE_CRITICAL_BOOST) {}
 	void use(Player& player) override;
 	bool isConsumable() const override { return true; }
 };
