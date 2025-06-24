@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include <iostream>
+#include "Constants.h"
 
-// 사용법: PrintUtil::clearScreen();
+// 사용법: PrintUtil::printTitle();
 namespace PrintUtil {
 	inline void printTitle()
 	{
@@ -21,19 +22,11 @@ namespace PrintUtil {
 	{
 		std::cout << "\n===========[ 상점 메뉴] ==========\n";
 		std::cout << "|                                |\n";
-		std::cout << "| 1. 구매하기                    |\n";
-		std::cout << "| 2. 판매하기                    |\n";
-		std::cout << "| 3. 상태조회                    |\n";
-		std::cout << "| 0. 뒤로가기                    |\n";
+		std::cout << "| " << Constants::BUY << ". 구매하기                    |\n";
+		std::cout << "| " << Constants::SELL << ". 판매하기                    | \n";
+		std::cout << "| " << Constants::STATUS << ". 상태조회                    |\n";
+		std::cout << "| " << Constants::EXIT << ". 뒤로가기                    |\n";
 		std::cout << "|                                |\n";
 		std::cout << "===================================\n";
-	}
-
-	inline void clearScreen()
-	{
-		for (int i = 0; i < 40; ++i) 
-		{
-			std::cout << "\n";
-		}
 	}
 }

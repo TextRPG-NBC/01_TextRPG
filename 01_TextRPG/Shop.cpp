@@ -2,6 +2,7 @@
 #include "Shop.h"
 #include "InputUtil.h"
 #include "Player.h"
+#include "Constants.h"
 
 Shop::Shop()
 {
@@ -45,17 +46,16 @@ void Shop::buy(Player& player)
 	}
 
 	player.subtractGold(price);		// NOTE: subtractGold는 Gold가 음수가 될 수 있으므로 주의
-	// if(itemList[choice-1]->getName() == "HP포션")	// NOTE: itemID가 없으면 이렇게 비교해야함
 	int itemId = itemList[choice - 1]->getId();
-	if (itemId == 1)		// TODO: Constants(→ HP포션)
+	if (itemId == Constants::HP_POTION)				// 1
 	{	// 새 객체를 생성하여 추가
 		player.addItem(std::make_unique<HP_Potion>());
 	}
-	else if (itemId == 2)
+	else if (itemId == Constants::ATTACK_BOOST)		// 2
 	{
 		player.addItem(std::make_unique<AttackBoost>());
 	}
-	else if (itemId == 3)
+	else if (itemId == Constants::CRITICAL_BOOST)	// 3
 	{
 		player.addItem(std::make_unique<CriticalBoost>());
 	}
@@ -74,7 +74,7 @@ void Shop::sell(Player& player)
 	std::cout << "\n--------------[ 보유 아이템 목록 ]----------------\n|\n";
 	for (size_t i = 0; i < inv.size(); ++i)
 	{
-		std::cout << "| " << i + 1 << ". " << inv[i]->getName() << "(" << inv[i]->getPrice() * 0.6
+		std::cout << "| " << i + 1 << ". " << inv[i]->getName() << "(" << inv[i]->getPrice() * Constants::SELL_RATE /*= 0.6*/
 			<< "골드): " << inv[i]->getDescription() << "\n";
 	}
 	std::cout << "|\n----------------------------------------------------\n";
@@ -89,7 +89,7 @@ void Shop::sell(Player& player)
 	}
 
 	int price = inv[choice - 1]->getPrice();
-	player.addGold(static_cast<int>(price * 0.6));	// TODO: Constants
+	player.addGold(static_cast<int>(price * Constants::SELL_RATE));	// 0.6f
 	
 	std::cout << "[" << inv[choice - 1]->getName() << "] 판매 완료(소지금: " << player.getGold() << "\n";
 	player.removeItemByIdx(choice - 1);

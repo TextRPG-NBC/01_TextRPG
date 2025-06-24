@@ -54,7 +54,7 @@ void GameManager::battle()
 
 	player.resetTempAbility();		// 버프 초기화
 
-	if (player.hasConsumable() && RandomUtil::getInt(1, 100) <= 20)	// TODO: Constants
+	if (player.hasConsumable() && RandomUtil::getInt(1, 100) <= Constants::P_USE_ITEM)
 	{
 		player.useItem();			// 20% 확률로 아이템 사용	
 	}
@@ -74,14 +74,14 @@ void GameManager::battle()
 		return;
 	}
 
-	int randomGold = RandomUtil::getInt(10, 20);	//TODO: Constants
-	player.addExp(50);			// TODO: Constants
+	int randomGold = RandomUtil::getInt(Constants::MIN_DROP_GOLD, Constants::MAX_DROP_GOLD);	// 10 ~ 20
+	player.addExp(Constants::DROP_EXP);		// 50
 	player.addGold(randomGold);
 	std::cout << monster->getName() << " 처치!";
 	std::cout << player.getName() << "(이)가 EXP(+50), 골드(+" << randomGold << ")를 획득했습니다.(레벨: " << player.getLevel() << "(" << player.getExp() << "/100), 골드: " << player.getGold() << ")\n";
 
-	if (RandomUtil::getInt(1, 100) <= 30)	// TODO: Constants
-	{	// 30% 확률로 아이템 드랍(아이템 드랍 세부확률은 monster->dropItem에서 정의)
+	if (RandomUtil::getInt(1, 100) <= Constants::P_DROP_ITEM)	// 30
+	{
 		player.addItem(monster->dropItem());
 	}
 	std::cout << "[전투를 종료합니다]\n\n";
@@ -95,20 +95,20 @@ void GameManager::visitShop()
 	{
 		PrintUtil::printShopMenu();
 		int shopChoice = InputUtil::getInt("▶ 상점 메뉴를 선택해주세요: ");
-		if (shopChoice == 0)	// 상점 나가기
+		if (shopChoice == Constants::EXIT)			// 0
 		{
 			std::cout << "상점을 나갑니다.\n";
 			break;
 		}
-		else if (shopChoice == 1)	// 아이템 구매
+		else if (shopChoice == Constants::BUY)		// 1
 		{
 			shop->buy(Player::getInstance());	
 		}
-		else if (shopChoice == 2)	// 아이템 판매
+		else if (shopChoice == Constants::SELL)		// 2
 		{
 			shop->sell(Player::getInstance());	
 		}
-		else if (shopChoice == 3)	// 상태조회
+		else if (shopChoice == Constants::STATUS)	// 3
 		{	
 			Player::getInstance().showStatus();
 		}
@@ -121,11 +121,11 @@ void GameManager::visitShop()
 
 std::unique_ptr<Monster> GameManager::generateMonster(int playerLevel)
 {
-	if (playerLevel >= 10)
+	if (playerLevel >= Constants::MAX_LEVEL)	// 10
 	{
 		return std::make_unique<BossMonster>(playerLevel);
 	}
-	int choice = RandomUtil::getInt(1, 3/*Constant::NORMAL_MONSTER_TYPE*/);
+	int choice = RandomUtil::getInt(1, Constants::NORMAL_MONSTER_TYPE);	// 3
 	switch (choice)
 	{
 	case Constants::GOBLIN:
