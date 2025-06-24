@@ -3,6 +3,7 @@
 #include "RandomUtil.h"
 #include "Item.h"
 #include "Player.h"
+#include "Equipments.h"
 
 
 Monster::Monster(const std::string& name, int level, int hp, int attack, bool isBoss)
@@ -26,22 +27,35 @@ std::unique_ptr<Item> Monster::dropItem()
 
 	int probability = RandomUtil::getInt(1, 100);
 
-	if (probability <= 25)	// TODO: Constants;
-	{	// 25% 확률로 Attack Boost 포션을 드랍함
+	if (probability <= 10)
+	{
+		// 10% 확률로 HP 포션을 드랍함
+		std::cout << "나뭇가지를 획득했습니다\n";
+		return std::move(std::make_unique<TreeBranch>());
+	}
+	else if (probability <= 20)
+	{
+		// 10% 확률로 HP 포션을 드랍함
+		std::cout << "가죽갑옷을 획득했습니다\n";
+		return std::move(std::make_unique<LeatherArmor>());
+	}
+	else if (probability <= 40)	// TODO: Constants;
+	{	// 20% 확률로 Attack Boost 포션을 드랍함
 		std::cout << "힘의 영약을 획득했습니다\n";
 		return std::move(std::make_unique<AttackBoost>());
 	}
-	else if (probability <= 50)			// TODO: Constants
-	{	// 25% 확률로 치명타 증가 물약을 드랍함
+	else if (probability <= 60)			// TODO: Constants
+	{	// 20% 확률로 치명타 증가 물약을 드랍함
 		std::cout << "치명타 증가 물약을 획득했습니다\n";
 		return std::move(std::make_unique<CriticalBoost>());
 	}
 	else if (probability <= 100)
 	{
-		// 50% 확률로 HP 포션을 드랍함
+		// 40% 확률로 HP 포션을 드랍함
 		std::cout << "HP 포션을 획득했습니다\n";
 		return std::move(std::make_unique<HP_Potion>());
 	}
+	return nullptr;
 }
 
 bool Monster::isAlive() const
