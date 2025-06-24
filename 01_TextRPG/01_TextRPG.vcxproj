@@ -20,15 +20,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Equipments.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="IArmor.h" />
     <ClInclude Include="InputUtil.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="IWeapon.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RandomUtil.h" />
     <ClInclude Include="Shop.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Equipments.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />

@@ -2,7 +2,7 @@
 #include "Monster.h"
 #include "RandomUtil.h"
 #include "Item.h"
-#include "Player.h";
+#include "Player.h"
 
 
 Monster::Monster(const std::string& name, int level, int hp, int attack, bool isBoss)

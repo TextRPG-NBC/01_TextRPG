@@ -1,8 +1,10 @@
 ﻿#pragma once
 #include <string>
+#include"IWeapon.h"
+#include <memory>
 
+#include "IArmor.h"
 class Player;
-
 class Item
 {
 protected:
@@ -22,6 +24,7 @@ public:
 	/* Member methods */
 	virtual void use(Player& player) = 0;
 	virtual bool isConsumable() const = 0;
+	virtual std::unique_ptr<Item> clone();
 	std::string getName() const { return name; }
 	std::string getDescription() const { return description; }
 	int getPrice() const { return price; }
