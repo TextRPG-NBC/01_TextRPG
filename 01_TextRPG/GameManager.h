@@ -18,5 +18,6 @@ public:
 	void run();
 	void battle();
 	void visitShop();
+	void openInventory();
 	std::unique_ptr<Monster> generateMonster(int playerLevel);
 };

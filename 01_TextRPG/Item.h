@@ -26,7 +26,7 @@ public:
 	virtual ~Item() = default;
 
 	/* Member methods */
-	virtual void use(Player& player) = 0;
+	virtual bool use(Player& player) = 0;
 	virtual bool isConsumable() const = 0;
 	virtual std::unique_ptr<Item> clone();
 	std::string getName() const { return name; }
@@ -40,7 +40,7 @@ class HP_Potion : public Item
 {
 public:
 	HP_Potion() : Item(Constants::HP_POTION, "HP포션", "체력을 50 회복시킵니다", Constants::PRICE_HP_POTION) {}
-	void use(Player& player) override;
+	bool use(Player& player) override;
 	bool isConsumable() const override { return true; }
 };
 
@@ -48,7 +48,7 @@ class AttackBoost : public Item
 {
 public:
 	AttackBoost() : Item(Constants::ATTACK_BOOST, "힘의 영약", "공격력을 10 증가시킵니다", Constants::PRICE_ATTACK_BOOST) {}
-	void use(Player& player) override;	
+	bool use(Player& player) override;	
 	bool isConsumable() const override { return true; }
 };
 
@@ -56,7 +56,7 @@ class CriticalBoost : public Item
 {
 public:
 	CriticalBoost() : Item(Constants::CRITICAL_BOOST, "치명타 확률 영약", "치명타확률을 10 증가시킵니다", Constants::PRICE_CRITICAL_BOOST) {}
-	void use(Player& player) override;
+	bool use(Player& player) override;
 	bool isConsumable() const override { return true; }
 };
 

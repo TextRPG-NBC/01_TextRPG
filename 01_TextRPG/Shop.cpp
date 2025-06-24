@@ -3,6 +3,7 @@
 #include "InputUtil.h"
 #include "Player.h"
 #include "Constants.h"
+#include "Equipments.h"
 
 Shop::Shop()
 {
@@ -10,6 +11,8 @@ Shop::Shop()
 	itemList.push_back(std::make_unique<HP_Potion>());
 	itemList.push_back(std::make_unique<AttackBoost>());
 	itemList.push_back(std::make_unique<CriticalBoost>());
+	itemList.push_back(std::make_unique<TreeBranch>());
+	itemList.push_back(std::make_unique<LeatherArmor>());
 }
 
 void Shop::showItems() const
@@ -58,6 +61,14 @@ void Shop::buy(Player& player)
 	else if (itemId == Constants::CRITICAL_BOOST)	// 3
 	{
 		player.addItem(std::make_unique<CriticalBoost>());
+	}
+	else if (itemId == 4)
+	{
+		player.addItem(std::make_unique<TreeBranch>());
+	}
+	else if (itemId == 5)
+	{
+		player.addItem(std::make_unique<LeatherArmor>());
 	}
 	std::cout << "[" << itemList[choice - 1]->getName() << "] 구매 완료(소지금: " << player.getGold() << "\n";
 }

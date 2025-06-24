@@ -2,9 +2,10 @@
 #include "Player.h"
 
 
-void TreeBranch::use(Player& player)
+bool TreeBranch::use(Player& player)
 {
 	player.equipWeapon(this->clone());
+	return true;
 }
 
 std::unique_ptr<Item> TreeBranch::clone()
@@ -24,9 +25,10 @@ void TreeBranch::unEquipped(Player& player)
 	player.decreaseCriticalProbability(5);
 }
 
-void LeatherArmor::use(Player& player)
+bool LeatherArmor::use(Player& player)
 {
 	player.equipArmor(this->clone());
+	return true;
 }
 
 std::unique_ptr<Item> LeatherArmor::clone()
@@ -37,6 +39,7 @@ std::unique_ptr<Item> LeatherArmor::clone()
 void LeatherArmor::equipped(Player& player)
 {
 	player.increaseMaxHP(15);
+	player.increaseCurrentHP(15);
 }
 
 void LeatherArmor::unEquipped(Player& player)
