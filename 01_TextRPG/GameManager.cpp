@@ -8,13 +8,14 @@
 #include "RandomUtil.h"
 #include "Constants.h"
 #include "InputUtil.h"
+#include "PrintUtil.h"
 
 GameManager::GameManager() : shop(std::make_unique<Shop>()), isClear(false) {}
 
 void GameManager::run()
 {
 	std::string playerName;
-	std::cout << "캐릭터 이름을 입력하세요 : ";
+	std::cout << "▶ 플레이어를 생성합니다. 이름을 입력하세요: ";
 	std::getline(std::cin, playerName);
 	Player& player = Player::getInstance(playerName);
 
@@ -25,18 +26,17 @@ void GameManager::run()
 		battle();
 		if (isClear || !player.isAlive()) break;
 
-		//char shopChoice = inputYorN("상점에 방문하시겠습니까? (Y/N) : ");
-		char shopChoice = InputUtil::getYorN("상점에 방문하시겠습니까? (Y/N): ");
+		char shopChoice = InputUtil::getYorN("▶ 상점에 방문하시겠습니까? (Y/N): ");
 		if (shopChoice == 'Y')	visitShop();
 	}
 
 	if (!player.isAlive())
 	{
-		std::cout << player.getName() << "가 사망했습니다. 게임오버!\n";
+		std::cout << player.getName() << "(이)가 사망했습니다. 게임오버!\n";
 	}
 	else if (isClear)
 	{
-		std::cout << "축하합니다. 게임을 클리어했습니다!\n";
+		// 게임클리어
 	}
 	else
 	{
@@ -46,7 +46,8 @@ void GameManager::run()
 
 void GameManager::battle()
 {
-	std::cout << "[전투를 시작합니다]\n";
+	std::cout << "\n[전투를 시작합니다]\n";
+	system("pause");
 	
 	Player& player = Player::getInstance();
 	std::unique_ptr<Monster> monster = generateMonster(player.getLevel());
@@ -68,31 +69,32 @@ void GameManager::battle()
 	if (!player.isAlive()) return;	// 플레이어 사망시
 	if (monster->isBossMonster())	// 보스몬스터 처치시
 	{
-		std::cout << "보스 몬스터를 처치했습니다!\n";
+		std::cout << "축하합니다. 보스 몬스터 [" << monster->getName() << "](을)를 처치하고 게임을 클리어했습니다!\n";
 		isClear = true;
 		return;
 	}
 
 	int randomGold = RandomUtil::getInt(10, 20);	//TODO: Constants
-	std::cout << monster->getName() << " 처치! 보상: EXP(+50), 골드(+" << randomGold << ")\n";
 	player.addExp(50);			// TODO: Constants
 	player.addGold(randomGold);
+	std::cout << monster->getName() << " 처치!";
+	std::cout << player.getName() << "(이)가 EXP(+50), 골드(+" << randomGold << ")를 획득했습니다.(레벨: " << player.getLevel() << "(" << player.getExp() << "/100), 골드: " << player.getGold() << ")\n";
 
 	if (RandomUtil::getInt(1, 100) <= 30)	// TODO: Constants
 	{	// 30% 확률로 아이템 드랍(아이템 드랍 세부확률은 monster->dropItem에서 정의)
 		player.addItem(monster->dropItem());
 	}
+	std::cout << "[전투를 종료합니다]\n\n";
 }
 
 void GameManager::visitShop()
 {
-	std::cout << "\n[상점에 방문했습니다]\n";
+	system("cls");
+	std::cout << "[상점에 방문했습니다]\n";
 	while (true)
 	{
-		std::cout << "상점 메뉴:\n";
-		std::cout << "1. 구매\n2.판매\n0. 나가기\n";
-		int shopChoice = InputUtil::getInt("상점 메뉴를 선택해주세요: ");
-		/*int shopChoice = getNumberFromUserInput("상점메뉴를 선택해주세요: ");*/
+		PrintUtil::printShopMenu();
+		int shopChoice = InputUtil::getInt("▶ 상점 메뉴를 선택해주세요: ");
 		if (shopChoice == 0)	// 상점 나가기
 		{
 			std::cout << "상점을 나갑니다.\n";
@@ -105,6 +107,10 @@ void GameManager::visitShop()
 		else if (shopChoice == 2)	// 아이템 판매
 		{
 			shop->sell(Player::getInstance());	
+		}
+		else if (shopChoice == 3)	// 상태조회
+		{	
+			Player::getInstance().showStatus();
 		}
 		else
 		{

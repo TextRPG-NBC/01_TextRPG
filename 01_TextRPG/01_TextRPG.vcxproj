@@ -27,6 +27,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="RandomUtil.h" />
     <ClInclude Include="Shop.h" />
+    <ClInclude Include="PrintUtil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp" />

@@ -163,6 +163,12 @@ int Player::getGold() const
 	return gold;
 }
 
+int Player::getExp() const
+{
+	std::cout << "[FOR DEBUG : Player.cpp > getExp]\n";
+	return exp;
+}
+
 std::string Player::getName() const
 {
 	std::cout << "[FOR DEBUG : Player.cpp > getName]\n";

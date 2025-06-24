@@ -33,39 +33,6 @@ namespace InputUtil{
 			catch (...) {
 				std::cout << "잘못된 입력입니다. 숫자만 입력하세요\n";
 			}
-
-			// 숫자인지 판별: 한글/특수문자 입력시 false
-			/*bool isNumber = std::all_of(input.begin(), input.end(), [](unsigned char c) {
-				return std::isdigit(static_cast<unsigned char>(c)); 
-			});
-
-			if (isNumber)
-			{
-				try
-				{
-					choice = std::stoi(input);
-					break;
-				}
-				catch (...)
-				{
-					std::cout << "정수 범위를 초과했습니다. 다시 입력하세요.\n";
-				}
-			}
-			else
-			{
-				std::cout << "잘못된 입력입니다. 숫자만 입력하세요\n";
-			}*/
-
-
-			//if (std::cin.fail())
-			//{
-			//	std::cin.clear();
-			//	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			//	std::cout << "잘못된 입력입니다. 숫자만 입력하세요\n";
-			//	continue;
-			//}
-			//std::cin.ignore();	// 개행문자 제거
-			//break;
 		}
 		return choice;
 	}

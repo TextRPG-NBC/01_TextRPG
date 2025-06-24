@@ -41,6 +41,7 @@ public:
 	bool hasConsumable() const;
 	int getLevel() const;
 	int getGold() const;
+	int getExp() const;
 	std::string getName() const;
 	std::vector<std::unique_ptr<Item>>& getInventory();
 

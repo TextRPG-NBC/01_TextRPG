@@ -1,12 +1,13 @@
 ﻿#include <iostream>
 #include "GameManager.h"
+#include "PrintUtil.h"
 
 int main() {
 	std::wcout.imbue(std::locale("ko_KR.UTF-8"));	// 한글 입력 예외처리(한국어 UTF-8 로케일 적용)
 
-	std::cout << "==========[ Text R.P.G ]==========\n";
+	PrintUtil::printTitle();
 	GameManager gameManager;
 	gameManager.run();
-	std::cout << "==========[  Game Over  ]==========\n";
+	PrintUtil::printGameOver();
 	return 0;
 }
