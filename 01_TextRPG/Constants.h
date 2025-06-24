@@ -5,7 +5,7 @@ namespace Constants {
 	// 정수형 상수
 	constexpr int MIN_LEVEL = 1;
 	constexpr int MAX_LEVEL = 10;
-	constexpr int MONSTER_TYPE_COUNT = 3;
+	constexpr int NORMAL_MONSTER_TYPE = 3;
 
 	// 문자열 상수
 	extern const char* GAME_TITLE;	// C++14는 inline 지원 X, cpp 파일에서 정의 필요
@@ -14,10 +14,9 @@ namespace Constants {
 
 	// --- enum 정의 ---
 	enum MonsterType {
-		GOBLIN = 0,
-		ORC = 1,
-		TROLL = 2,
-		MONSTER_TYPE_COUNT_ENUM = 3 // 상수와 이름 구분 가능
+		GOBLIN = 1,
+		ORC = 2,
+		TROLL = 3,
 	};
 
 	enum class ItemType {

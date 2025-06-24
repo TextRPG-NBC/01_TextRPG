@@ -1,16 +1,19 @@
 ﻿#pragma once
 #include <vector>
 #include <memory>
-#include "IItem.h"
+#include "Item.h"
 
-class Player;
-
-class Shop {
+class Shop
+{
 private:
-	std::vector<std::unique_ptr<IItem>> stock;
+	std::vector<std::unique_ptr<Item>> itemList;
+
 public:
+	/* Constructor */
 	Shop();
-	void ShowItems() const;
-	void Buy(Player& p);
-	void Sell(Player& p);
+
+	/* Member methods */
+	void showItems() const;
+	void buy(Player& player);
+	void sell(Player& player);
 };

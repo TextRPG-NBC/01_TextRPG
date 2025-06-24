@@ -13,129 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="헤더 파일\Item">
-      <UniqueIdentifier>{0bb2c469-01d0-470c-b1bb-6d336902857e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Item">
-      <UniqueIdentifier>{b725ebce-764b-4bdd-9896-c0d27332c633}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Character">
-      <UniqueIdentifier>{624d7359-9534-4bf9-9f23-a1a60c6d3579}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Character">
-      <UniqueIdentifier>{8912ebd9-6f7d-4ecf-b9a6-dfc3690f4dca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Monster">
-      <UniqueIdentifier>{f0177b11-1c01-434b-afea-64b0ccb91f65}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Monster">
-      <UniqueIdentifier>{b1b0930d-73e5-4168-9439-802bbbc5de60}</UniqueIdentifier>
+    <Filter Include="헤더 파일\Util">
+      <UniqueIdentifier>{d78ca816-c445-4edf-b721-edff93bb5dfb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>소스 파일\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthPotion.cpp">
-      <Filter>소스 파일\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="CriticalBoost.cpp">
-      <Filter>소스 파일\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="AttackBoost.cpp">
-      <Filter>소스 파일\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Armor.cpp">
-      <Filter>소스 파일\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>소스 파일\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="MaxHealthBoost.cpp">
-      <Filter>소스 파일\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Constants.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="BossMonster.cpp">
-      <Filter>소스 파일\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Goblin.cpp">
-      <Filter>소스 파일\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Orc.cpp">
-      <Filter>소스 파일\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Troll.cpp">
-      <Filter>소스 파일\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Shop.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="IItem.h">
-      <Filter>헤더 파일\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthPotion.h">
-      <Filter>헤더 파일\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="AttackBoost.h">
-      <Filter>헤더 파일\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="CriticalBoost.h">
-      <Filter>헤더 파일\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>헤더 파일\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Armor.h">
-      <Filter>헤더 파일\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>헤더 파일\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="MaxHealthBoost.h">
-      <Filter>헤더 파일\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="SCharacter.h">
-      <Filter>헤더 파일\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="SItem.h">
-      <Filter>헤더 파일\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Constants.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="RandomUtil.h">
+    <ClInclude Include="Item.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="BossMonster.h">
-      <Filter>헤더 파일\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Goblin.h">
-      <Filter>헤더 파일\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>헤더 파일\Monster</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Orc.h">
-      <Filter>헤더 파일\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Troll.h">
-      <Filter>헤더 파일\Monster</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Shop.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>헤더 파일\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="InputUtil.h">
+      <Filter>헤더 파일\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomUtil.h">
+      <Filter>헤더 파일\Util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

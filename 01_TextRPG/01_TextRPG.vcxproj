@@ -18,6 +18,24 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="InputUtil.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="RandomUtil.h" />
+    <ClInclude Include="Shop.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Shop.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -123,50 +141,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="BossMonster.cpp" />
-    <ClCompile Include="Goblin.cpp" />
-    <ClCompile Include="Constants.cpp" />
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="ItemManager.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Orc.cpp" />
-    <ClCompile Include="Shop.cpp" />
-    <ClCompile Include="Troll.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="BossMonster.h" />
-    <ClInclude Include="Goblin.h" />
-    <ClInclude Include="ItemManager.h" />
-    <ClInclude Include="Monster.h" />
-    <ClInclude Include="Orc.h" />
-    <ClInclude Include="Shop.h" />
-    <ClInclude Include="Troll.h" />
-    <ClCompile Include="Armor.cpp" />
-    <ClCompile Include="AttackBoost.cpp" />
-    <ClCompile Include="Character.cpp" />
-    <ClCompile Include="CriticalBoost.cpp" />
-    <ClCompile Include="HealthPotion.cpp" />
-    <ClCompile Include="MaxHealthBoost.cpp" />
-    <ClCompile Include="Weapon.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Armor.h" />
-    <ClInclude Include="AttackBoost.h" />
-    <ClInclude Include="Character.h" />
-    <ClInclude Include="SCharacter.h" />
-    <ClInclude Include="CriticalBoost.h" />
-    <ClInclude Include="HealthPotion.h" />
-    <ClInclude Include="IItem.h" />
-    <ClInclude Include="SItem.h" />
-    <ClInclude Include="MaxHealthBoost.h" />
-    <ClInclude Include="Weapon.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Constants.h" />
-    <ClInclude Include="GameManager.h" />
-    <ClInclude Include="RandomUtil.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
