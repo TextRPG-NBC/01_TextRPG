@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <memory>
 #include <algorithm>
 #include "Player.h"
 #include "Monster.h"
@@ -68,6 +69,11 @@ void Player::useItem()
 	}
 }
 
+void Player::useItemUsingIndex(int index)
+{
+	inventory[index]->use(*this);
+}
+
 void Player::attackMonster(Monster& monster)
 {
 	std::cout << "[FOR DEBUG : Player.cpp > attackMonster]\n";
@@ -81,7 +87,7 @@ void Player::takeDamage(int damage)
 	std::cout << "[FOR DEBUG : Player.cpp > takeDamage]\n";
 	curHP -= damage;
 	if (curHP < 0) curHP = 0;
-	std::cout << name << "이 " << damage << "받았음. 남은 HP : " << curHP << "/" << maxHP <<"\n";		// TODO: 출력 포멧 수정
+	//std::cout << name << "이 " << damage << "받았음. 남은 HP : " << curHP << "/" << maxHP <<"\n";		// TODO: 출력 포멧 수정
 }
 
 void Player::addExp(int amount)
@@ -95,6 +101,46 @@ void Player::addGold(int amount)
 {
 	std::cout << "[FOR DEBUG : Player.cpp > addGold]\n";
 	gold += amount;
+}
+
+void Player::increaseAttack(int amount)
+{
+	if (amount<0) return;
+	attack+=amount;
+}
+
+void Player::increaseCriticalProbability(int amount)
+{
+	if (amount<0) return;
+	criticalProbability+=amount;
+}
+
+void Player::increaseMaxHP(int amount)
+{
+	if (amount<0) return;
+	maxHP+=amount;
+}
+
+void Player::decreaseAttack(int amount)
+{
+	if (amount<0) return;
+	attack-=amount;
+}
+
+void Player::decreaseCriticalProbability(int amount)
+{
+	if (amount<0) return;
+	criticalProbability-=amount;
+}
+
+void Player::decreaseMaxHP(int amount)
+{
+	if (amount<0) return;
+
+	maxHP-=amount;
+	
+	if (curHP > maxHP)
+	{curHP = maxHP;}
 }
 
 void Player::subtractGold(int amount)
@@ -175,22 +221,87 @@ std::string Player::getName() const
 	return name;
 }
 
+int Player::getCurrentHP() const
+{
+	return curHP;
+}
+
 std::vector<std::unique_ptr<Item>>& Player::getInventory()
 {
 	std::cout << "[FOR DEBUG : Player.cpp > getInventory]\n";
 	return inventory;
 }
 
+void Player::equipWeapon(std::unique_ptr<Item> weapon)
+{
+	unEquipWeapon();
+	
+	equippingWeapon = std::move(weapon);
+	
+	IWeapon* tempWeapon = dynamic_cast<IWeapon*>(equippingWeapon.get());
+	if (tempWeapon)
+	{
+		tempWeapon->equipped(*this);				
+	}
+
+}
+
+void Player::equipArmor(std::unique_ptr<Item> armor)
+{
+	unEquipArmor();
+	
+	equippingArmor = std::move(armor);
+	
+	IArmor* tempArmor = dynamic_cast<IArmor*>(equippingArmor.get());
+	if (tempArmor)
+	{
+		tempArmor->equipped(*this);				
+	}
+}
+void Player::unEquipWeapon()
+{
+	if (!equippingWeapon) return;
+
+	IWeapon* tempWeapon = dynamic_cast<IWeapon*>(equippingWeapon.get());
+	if (tempWeapon)
+	{
+		tempWeapon->unEquipped(*this);				
+	}
+	
+	addItem(std::move(equippingWeapon));
+	equippingWeapon = nullptr;
+}
+
+
+
+void Player::unEquipArmor()
+{
+	if (!equippingArmor) return;
+
+	IArmor* tempArmor = dynamic_cast<IArmor*>(equippingArmor.get());
+	if (tempArmor)
+	{
+		tempArmor->unEquipped(*this);				
+	}
+	
+	addItem(std::move(equippingArmor));
+	equippingArmor = nullptr;
+}
+
+
 /* 내부 호출용 함수 */
 int Player::getAttackDamage() const
 {
 	std::cout << "[FOR DEBUG : Player.cpp > getAttackDamage]\n";
+	
+	int damage = attack + tempAttackBuff;
+	
 	int randomInt = RandomUtil::getInt(1, 100);
 	if (randomInt <= getCriticalProbability())
 	{
-		return (attack + tempAttackBuff) * 2;	// TODO: Constants(치뎀으로 확장 가능)
+		return (damage) * 2;	// TODO: Constants(치뎀으로 확장 가능)
 	}
-	return (attack + tempAttackBuff);
+	return (damage);
 }
 
 int Player::getCriticalProbability() const
@@ -206,8 +317,9 @@ void Player::levelUp()
 	{
 		exp -= 100;
 		++level;
-		maxHP += level * 20;		// TODO: Constants
-		attack += level * 5;		// TODO: Constants
+		maxHP += 20;		// TODO: Constants
+		attack += 5;		// TODO: Constants
+
 		curHP = maxHP;
 		std::cout << "[레벨업] " << level << "레벨! 체력 : " << maxHP << " 공격력: " << attack << "\n";	// TODO: 출력포멧팅
 	}

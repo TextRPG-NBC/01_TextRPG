@@ -20,3 +20,9 @@ void CriticalBoost::use(Player& player)
 	std::cout << "[FOR DEBUG : Item.cpp > CriticalBoost::use]\n";
 	player.addTempCriticalProbability(10);	//TODO: Constants
 }
+
+std::unique_ptr<Item> Item::clone()
+{
+	return nullptr;
+}
+;

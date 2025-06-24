@@ -44,6 +44,11 @@
     </ClInclude>
     <ClInclude Include="PrintUtil.h">
       <Filter>헤더 파일\Util</Filter>
+    <ClInclude Include="IWeapon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="IArmor.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
