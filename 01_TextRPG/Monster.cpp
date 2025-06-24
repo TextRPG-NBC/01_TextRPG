@@ -10,22 +10,18 @@ Monster::Monster(const std::string& name, int level, int hp, int attack, bool is
 
 void Monster::takeDamage(int damage)
 {
-	std::cout << "[FOR DEBUG : Monster.cpp > takeDamage]\n";
 	curHP -= damage;
 	if (curHP < 0) curHP = 0;
-	std::cout << "[" << name << "] 이(가) " << damage << " 데미지 받음! (HP: " << curHP << "/" << maxHP << ")\n";		// TODO: 제안사항대로 출력
 }
 
 void Monster::attackPlayer(Player& player)
 {
-	std::cout << "[FOR DEBUG : Monster.cpp > attackPlayer]\n";
-	std::cout << name << " attack to " << player.getName() << " (데미지 : " << attack << ")\n";	// TODO: 제안사항대로 출력
+	std::cout << "[피격] "<< name << "이(가) " << player.getName() << "을(를) 공격합니다! " << player.getName() << " 체력: " << player.getCurrentHP() << "\n";
 	player.takeDamage(attack);
 }
 
 std::unique_ptr<Item> Monster::dropItem()
 {
-	std::cout << "[FOR DEBUG : Monster.cpp > dropItem]\n";
 	std::cout << "[아이템 드랍] " << name << "으로부터 ";
 
 	int probability = RandomUtil::getInt(1, 100);
@@ -65,27 +61,23 @@ int Monster::getLevel() const
 Goblin::Goblin(int playerLevel)				// TODO: Constants
 	:Monster("고블린", playerLevel, playerLevel * RandomUtil::getInt(20, 30), playerLevel * RandomUtil::getInt(5, 10), false)
 {
-	std::cout << "[FOR DEBUG : Monster.cpp > Goblin]\n";
-	std::cout << "고블린 생성됨. 스텟, 기타 정보 표시 필요\n";			// TODO: 제안사항대로 출력
+	std::cout << "몬스터 "<< name << " 등장! 체력: " << curHP << ", 공격력 : " << attack << "\n";	// TODO: 제안사항대로 출력
 }
 
 Orc::Orc(int playerLevel)					// TODO: Constants
 	:Monster("오크", playerLevel, playerLevel* RandomUtil::getInt(20, 30), playerLevel* RandomUtil::getInt(5, 10), false) 
 {
-	std::cout << "[FOR DEBUG : Monster.cpp > Orc]\n";
-	std::cout << "오크 생성됨. 스텟, 기타 정보 표시 필요\n";			// TODO: 제안사항대로 출력
+	std::cout << "몬스터 " << name << " 등장! 체력: " << curHP << ", 공격력 : " << attack << "\n";			// TODO: 제안사항대로 출력
 }
 
 Troll::Troll(int playerLevel)				// TODO: Constants
 	:Monster("트롤", playerLevel, playerLevel* RandomUtil::getInt(20, 30), playerLevel* RandomUtil::getInt(5, 10), false) 
 {
-	std::cout << "[FOR DEBUG : Monster.cpp > Troll]\n";
-	std::cout << "트롤 생성됨. 스텟, 기타 정보 표시 필요\n";			// TODO: 제안사항대로 출력
+	std::cout << "몬스터 " << name << " 등장! 체력: " << curHP << ", 공격력 : " << attack << "\n";			// TODO: 제안사항대로 출력
 }
 
 BossMonster::BossMonster(int playerLevel)	// TODO: Constants
-	:Monster("보스몬스터", playerLevel, playerLevel* RandomUtil::getInt(30, 45), playerLevel* RandomUtil::getInt(8, 15), true)
+	:Monster("드래곤", playerLevel, playerLevel* RandomUtil::getInt(30, 45), playerLevel* RandomUtil::getInt(8, 15), true)
 {
-	std::cout << "[FOR DEBUG : Monster.cpp > BossMonster]\n";
-	std::cout << "보스 생성됨. 스텟, 기타 정보 표시 필요\n";			// TODO: 제안사항대로 출력
+	std::cout << "보스 몬스터 " << name << " 등장! 체력: " << curHP << ", 공격력 : " << attack << "\n";			// TODO: 제안사항대로 출력
 }
