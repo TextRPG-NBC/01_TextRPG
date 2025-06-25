@@ -15,7 +15,7 @@ Monster::Monster(const std::string& name, int level, int hp, int attack, bool is
 	else {
 		std::cout << "[일반 몬스터 생성] : ";
 	}
-	std::cout << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
+	std::cout << "\"" << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
 }
 
 void Monster::takeDamage(int damage)
