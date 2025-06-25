@@ -10,12 +10,7 @@ namespace Constants {
 	constexpr int DROP_EXP = 50;
 	constexpr float SELL_RATE = 0.6f;
 
-
-	
-
-	// 문자열 상수(쓰지말자)
-	extern const char* GAME_TITLE;	// C++14는 inline 지원 X, cpp 파일에서 정의 필요
-	extern const char* VERSION;
+	// 문자열 상수 : C++14는 inline 지원 X, cpp 파일에서 정의 필요
 
 
 	// --- enum 정의 ---
@@ -86,7 +81,4 @@ namespace Constants {
 		AB_TREE_BRANCH_CRI = 5,
 		AB_LEATHER_ARMOR = 15,
 	};
-
-	
-
 }

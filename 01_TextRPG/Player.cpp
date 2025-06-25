@@ -39,7 +39,8 @@ void Player::showStatus() const
 	if (inventory.empty()) 
 		std::cout << "없음";
 	else 
-		for (auto& item : inventory) std::cout << "[" << item->getName() << "] ";
+		for (auto& item : inventory) 
+			std::cout << "[" << item->getName() << "] ";
 	std::cout << "\n--------------------------------------\n\n";
 }
 
@@ -77,7 +78,6 @@ void Player::useItemUsingIndex(int index)
 	{
 		inventory.erase(inventory.begin() + index);
 	}
-
 }
 
 void Player::attackMonster(Monster& monster)
@@ -94,7 +94,6 @@ void Player::takeDamage(int damage)
 	// std::cout << "[FOR DEBUG : Player.cpp > takeDamage]\n";
 	curHP -= damage;
 	if (curHP < 0) curHP = 0;
-	//std::cout << name << "이 " << damage << "받았음. 남은 HP : " << curHP << "/" << maxHP <<"\n";		// TODO: 출력 포멧 수정
 }
 
 void Player::addExp(int amount)
@@ -273,7 +272,6 @@ void Player::equipWeapon(std::unique_ptr<Item> weapon)
 	{
 		tempWeapon->equipped(*this);				
 	}
-
 }
 
 void Player::equipArmor(std::unique_ptr<Item> armor)

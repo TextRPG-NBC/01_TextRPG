@@ -47,7 +47,7 @@ public:
 class AttackBoost : public Item
 {
 public:
-	AttackBoost() : Item(Constants::ATTACK_BOOST, "힘의 영약", "공격력을 10 증가시킵니다", Constants::PRICE_ATTACK_BOOST) {}
+	AttackBoost() : Item(Constants::ATTACK_BOOST, "힘의 영약", "이번 전투동안 공격력을 10 증가시킵니다", Constants::PRICE_ATTACK_BOOST) {}
 	bool use(Player& player) override;	
 	bool isConsumable() const override { return true; }
 };
@@ -55,7 +55,7 @@ public:
 class CriticalBoost : public Item
 {
 public:
-	CriticalBoost() : Item(Constants::CRITICAL_BOOST, "치명타 확률 영약", "치명타확률을 10 증가시킵니다", Constants::PRICE_CRITICAL_BOOST) {}
+	CriticalBoost() : Item(Constants::CRITICAL_BOOST, "치명타 확률 영약", "이번 전투동안 치명타확률을 10 증가시킵니다", Constants::PRICE_CRITICAL_BOOST) {}
 	bool use(Player& player) override;
 	bool isConsumable() const override { return true; }
 };

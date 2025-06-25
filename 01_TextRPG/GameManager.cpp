@@ -21,6 +21,7 @@ void GameManager::run()
 	while (player.isAlive())
 	{
 		player.showStatus();
+		system("pause");
 
 		battle();
 		player.resetTempAbility();		// 전투 후 버프 초기화
@@ -31,34 +32,22 @@ void GameManager::run()
 		char shopChoice = InputUtil::getYorN("▶ 상점에 방문하시겠습니까? (Y/N): ");
 		if (shopChoice == 'Y')	visitShop();
 		PrintUtil::clearScreen();
-
 	}
 
 	if (!player.isAlive())
 	{
 		std::cout << "[전투패배] : \"" << player.getName() << "\"이(가) 사망했습니다. 게임오버!\n";
 	}
-	//else if (isClear)
-	//{
-	//	// 게임클리어
-	//}
-	//else
-	//{
-	//	//// std::cout << "[FOR DEBUG] Default : 게임을 종료합니다\n";
-	//}
+
 	std::cout << "[게임종료] : ... 게임을 종료합니다 ...\n";
 }
 
 void GameManager::battle()
 {
+	PrintUtil::clearScreen();
 	std::cout << "\n▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼[전투를 시작합니다]▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼\n";
-	system("pause");
-	std::cout << "\n";
-	
 	Player& player = Player::getInstance();
 	std::unique_ptr<Monster> monster = generateMonster(player.getLevel());
-
-	
 
 	if (player.hasConsumable() && RandomUtil::getInt(1, 100) <= Constants::P_USE_ITEM)
 	{
@@ -154,7 +143,6 @@ void GameManager::openInventory()
 		std::cout << "잘못된 입력입니다. 아이템의 숫자를 입력해주세요.\n";
 		system("pause");
 	}
-
 }
 
 std::unique_ptr<Monster> GameManager::generateMonster(int playerLevel)
@@ -163,6 +151,7 @@ std::unique_ptr<Monster> GameManager::generateMonster(int playerLevel)
 	{
 		return std::make_unique<BossMonster>(playerLevel);
 	}
+
 	int choice = RandomUtil::getInt(1, Constants::NORMAL_MONSTER_TYPE);	// 3
 	switch (choice)
 	{
