@@ -24,7 +24,7 @@ void TreeBranch::equipped(Player& player)
 void TreeBranch::unEquipped(Player& player)
 {
 	std::cout << "[무기 탈착] : " << getName() << "을(를) 탈착했습니다." << std::endl;
-	std::cout << " - 공격력이 "<< Constants::AB_TREE_BRANCH_ATK<< " 치명타 확률이 +" << Constants::AB_TREE_BRANCH_CRI << " 감소했습니다." << std::endl;
+	std::cout << " - 공격력이 "<< Constants::AB_TREE_BRANCH_ATK<< " 치명타 확률이 " << Constants::AB_TREE_BRANCH_CRI << " 감소했습니다." << std::endl;
 	player.decreaseAttack(Constants::AB_TREE_BRANCH_ATK);
 	player.decreaseCriticalProbability(Constants::AB_TREE_BRANCH_CRI);
 }

@@ -84,7 +84,7 @@ void Player::attackMonster(Monster& monster)
 {
 	// std::cout << "[FOR DEBUG : Player.cpp > attackMonster]\n";
 	int attackDamage = getAttackDamage();
-	std::cout << "[공격] : \"" << name << "\"이(가) \"" << monster.getName() << "\"을(를) 공격합니다!(데미지: " << attackDamage << ") → " << monster.getName() << " 체력(" << monster.getCurHP();
+	std::cout << "[공격] : \"" << name << "\"이(가) \"" << monster.getName() << "\"을(를) 공격합니다!(데미지: " << attackDamage << ") → \"" << monster.getName() << "\" 체력(" << monster.getCurHP();
 	monster.takeDamage(attackDamage);
 	std::cout << " → " << monster.getCurHP() << ") / " << monster.getMaxHP() << "\n";
 }

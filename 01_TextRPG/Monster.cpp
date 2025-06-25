@@ -22,7 +22,7 @@ Monster::Monster(const std::string& name, int level, bool isBoss)
 	{
 		std::cout << "[일반 몬스터 생성] : \"";
 	}
-	std::cout << "\"" << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
+	std::cout << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
 }
 
 void Monster::takeDamage(int damage)
@@ -33,8 +33,8 @@ void Monster::takeDamage(int damage)
 
 void Monster::attackPlayer(Player& player)
 {
-	std::cout << "[피격] : \"" << name << "\"이(가) \"" << player.getName() << "\"을(를) 공격합니다!(데미지: " << attack << ") → "
-		<< player.getName() << " 체력(" << player.getCurrentHP();
+	std::cout << "[피격] : \"" << name << "\"이(가) \"" << player.getName() << "\"을(를) 공격합니다!(데미지: " << attack << ") → \""
+		<< player.getName() << "\" 체력(" << player.getCurrentHP();
 	player.takeDamage(attack);
 	std::cout << " → " << player.getCurrentHP() << ") / " << player.getMaxHP() << "\n";
 }
@@ -45,31 +45,28 @@ std::unique_ptr<Item> Monster::dropItem()
 
 	int probability = RandomUtil::getInt(1, 100);
 
-	if (probability <= 10)
+	if (probability <= 10)		// 10% 확률로 나뭇가지를 드랍함
 	{
-		// 10% 확률로 HP 포션을 드랍함
 		std::cout << "나뭇가지를 획득했습니다\n";
 		return std::move(std::make_unique<TreeBranch>());
 	}
-	else if (probability <= 20)
+	else if (probability <= 20)	// 10% 확률로 가죽갑옷을 드랍함
 	{
-		// 10% 확률로 HP 포션을 드랍함
 		std::cout << "가죽갑옷을 획득했습니다\n";
 		return std::move(std::make_unique<LeatherArmor>());
 	}
-	else if (probability <= 40)	
-	{	// 20% 확률로 Attack Boost 포션을 드랍함
+	else if (probability <= 40)	// 20% 확률로 Attack Boost 포션을 드랍함
+	{	
 		std::cout << "힘의 영약을 획득했습니다\n";
 		return std::move(std::make_unique<AttackBoost>());
 	}
-	else if (probability <= 60)			
-	{	// 20% 확률로 치명타 증가 물약을 드랍함
-		std::cout << "치명타 증가 물약을 획득했습니다\n";
+	else if (probability <= 60)	// 20% 확률로 치명타 증가 물약을 드랍함
+	{		
+		std::cout << "치명타 확률 영약을 획득했습니다\n";
 		return std::move(std::make_unique<CriticalBoost>());
 	}
-	else if (probability <= 100)
+	else if (probability <= 100)// 40% 확률로 HP 포션을 드랍함
 	{
-		// 40% 확률로 HP 포션을 드랍함
 		std::cout << "HP 포션을 획득했습니다\n";
 		return std::move(std::make_unique<HP_Potion>());
 	}

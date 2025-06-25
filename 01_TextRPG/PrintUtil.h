@@ -6,11 +6,11 @@
 namespace PrintUtil {
 	inline void printTitle()
 	{
-		std::cout << "==========[ Text R.P.G ]===========\n";
-		std::cout << "|                                 |\n";
-		std::cout << "|           모험의 시작           |\n";
-		std::cout << "|                                 |\n";
-		std::cout << "===================================\n";
+		std::cout << "====================[ Text R.P.G ]=======================\n";
+		std::cout << "|                                                       |\n";
+		std::cout << "|                      모험의 시작                      |\n";
+		std::cout << "|                                                       |\n";
+		std::cout << "=========================================================\n";
 	}
 
 	inline void printGameOver()
