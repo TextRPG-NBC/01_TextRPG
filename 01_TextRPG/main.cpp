@@ -18,6 +18,7 @@ int main() {
 	GameManager gameManager;
 	gameManager.run();
 	PrintUtil::printGameOver();
+	system("pause");
 
 	return 0;
 }

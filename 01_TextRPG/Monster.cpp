@@ -6,14 +6,21 @@
 #include "Equipments.h"
 
 
-Monster::Monster(const std::string& name, int level, int hp, int attack, bool isBoss)
-	: name(name), level(level), maxHP(hp), curHP(hp), attack(attack), isBoss(isBoss){
+Monster::Monster(const std::string& name, int level, bool isBoss)
+	: name(name), level(level), isBoss(isBoss){
+	maxHP = level * RandomUtil::getInt(Constants::NM_MIN_HP_RATE, Constants::NM_MAX_HP_RATE);
+	curHP = maxHP;
+	attack = level * RandomUtil::getInt(Constants::NM_MIN_ATK_RATE, Constants::NM_MIN_ATK_RATE);
 	if (isBoss)
 	{
-		std::cout << "[보스 몬스터 생성] : ";
+		maxHP *= Constants::BOSS_STATUS_RATE;
+		curHP = maxHP;
+		attack *= Constants::BOSS_STATUS_RATE;
+		std::cout << "[보스 몬스터 생성] : \"";
 	}
-	else {
-		std::cout << "[일반 몬스터 생성] : ";
+	else 
+	{
+		std::cout << "[일반 몬스터 생성] : \"";
 	}
 	std::cout << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
 }
@@ -95,26 +102,10 @@ int Monster::getLevel() const
 }
 
 /* 몬스터 종류별 생성자 */
-Goblin::Goblin(int playerLevel)				
-	:Monster("고블린", playerLevel, 
-		playerLevel * RandomUtil::getInt(Constants::NM_MIN_HP_RATE, Constants::NM_MAX_HP_RATE),
-		playerLevel * RandomUtil::getInt(Constants::NM_MIN_ATK_RATE, Constants::NM_MIN_ATK_RATE), false)
-{}
+Goblin::Goblin(int playerLevel) : Monster("고블린", playerLevel, false) {}
 
-Orc::Orc(int playerLevel)					
-	:Monster("오크", playerLevel,
-		playerLevel* RandomUtil::getInt(Constants::NM_MIN_HP_RATE, Constants::NM_MAX_HP_RATE),
-		playerLevel* RandomUtil::getInt(Constants::NM_MIN_ATK_RATE, Constants::NM_MIN_ATK_RATE), false)
-{}
+Orc::Orc(int playerLevel) : Monster("오크", playerLevel, false) {}
 
-Troll::Troll(int playerLevel)
-	:Monster("트롤", playerLevel,
-		playerLevel* RandomUtil::getInt(Constants::NM_MIN_HP_RATE, Constants::NM_MAX_HP_RATE),
-		playerLevel* RandomUtil::getInt(Constants::NM_MIN_ATK_RATE, Constants::NM_MIN_ATK_RATE), false)
-{}
+Troll::Troll(int playerLevel) : Monster("트롤", playerLevel, false) {}
 
-BossMonster::BossMonster(int playerLevel)	
-	:Monster("드래곤", playerLevel, 
-		playerLevel* RandomUtil::getInt(Constants::BS_MIN_HP_RATE, Constants::BS_MAX_HP_RATE),
-		playerLevel* RandomUtil::getInt(Constants::BS_MIN_ATK_RATE, Constants::BS_MIN_ATK_RATE), true)
-{}
+BossMonster::BossMonster(int playerLevel) : Monster("드래곤", playerLevel, true) {}

@@ -45,17 +45,17 @@ void GameManager::run()
 void GameManager::battle()
 {
 	PrintUtil::clearScreen();
-	std::cout << "\n▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼[전투를 시작합니다]▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼\n";
+	std::cout << "\n▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼[전투를 시작합니다]▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼\n\n";
 	Player& player = Player::getInstance();
 	std::unique_ptr<Monster> monster = generateMonster(player.getLevel());
 
-	if (player.hasConsumable() && RandomUtil::getInt(1, 100) <= Constants::P_USE_ITEM)
-	{
-		player.useItem();			// 20% 확률로 아이템 사용	
-	}
-
 	while (monster->isAlive() && player.isAlive())	// 일기토
 	{
+		if (player.hasConsumable() && RandomUtil::getInt(1, 100) <= Constants::P_USE_ITEM)
+		{	// 20% 확률로 아이템 사용
+			player.useItem();		
+		}
+		
 		player.attackMonster(*monster);
 		if (!monster->isAlive())	break;
 		monster->attackPlayer(player);
@@ -64,7 +64,8 @@ void GameManager::battle()
 	if (!player.isAlive()) return;	// 플레이어 사망시
 	if (monster->isBossMonster())	// 보스몬스터 처치시
 	{
-		std::cout << "[ ★ 게임 클리어 ★ ] : 축하합니다. 보스 몬스터 \"" << monster->getName() << "\"을(를) 처치하고 게임을 클리어했습니다!\n";
+		std::cout << "\n▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲[전투를 종료합니다]▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲\n\n";
+		std::cout << "\n[ ★ 게임 클리어 ★ ] : 축하합니다. 보스 몬스터 \"" << monster->getName() << "\"을(를) 처치하고 게임을 클리어했습니다!\n";
 		isClear = true;
 		return;
 	}
@@ -122,7 +123,7 @@ void GameManager::openInventory()
 	player.showStatus();
 	if (player.getInventory().empty())
 	{
-		std::cout << "인벤토리가 비어있습니다.\n";
+		std::cout << "[ 인벤토리가 비어있습니다. ]\n";
 		system("pause");
 		return;
 	}

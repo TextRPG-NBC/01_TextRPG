@@ -81,7 +81,7 @@ void Shop::sell(Player& player)
 	std::vector<std::unique_ptr<Item>>& inv = player.getInventory();
 	if (inv.empty())
 	{
-		std::cout << "판매할 아이템이 없습니다.\n";
+		std::cout << "[ 판매할 아이템이 없습니다.] \n";
 		system("pause");
 		return;
 	}

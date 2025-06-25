@@ -13,7 +13,8 @@ protected:
 	bool isBoss;
 public:
 	/* Constructor */
-	Monster(const std::string& name, int level, int hp, int attack, bool isBoss);
+	Monster(const std::string& name, int level, bool isBoss);
+	//Monster(const std::string& name, int level, int hp, int attack, bool isBoss);
 	
 	/* Destructor */
 	virtual ~Monster() = default;

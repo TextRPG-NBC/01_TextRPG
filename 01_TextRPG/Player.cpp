@@ -63,7 +63,7 @@ void Player::useItem()
 	{
 		if (inventory[i]->isConsumable())
 		{
-			std::cout << "[아이템 사용] " << inventory[i]->getName() << "\n";
+			//std::cout << "[아이템 사용] " << inventory[i]->getName() << "\n";
 			inventory[i]->use(*this);
 			inventory.erase(inventory.begin() + i);
 			break;
@@ -171,23 +171,26 @@ void Player::addItem(std::unique_ptr<Item> item)
 void Player::healHP(int amount)
 {
 	// std::cout << "[FOR DEBUG : Player.cpp > healHP]\n";
+	std::cout << "HP가 +" << amount << " 회복되었습니다(체력: " << curHP;
 	curHP += amount;
 	if (curHP > maxHP)	curHP = maxHP;
-	std::cout << "HP가 +" << amount << " 회복되었습니다(체력: " << curHP << "/" << maxHP << ")\n";
+	std::cout << " → " << curHP << " / " << maxHP << ")\n";
 }
 
 void Player::addTempAttack(int amount)
 {
 	// std::cout << "[FOR DEBUG : Player.cpp > addTempAttack]\n";
+	std::cout << "공격력이 +" << amount << " 증가했습니다!(공격력: " << attack + tempAttackBuff;
 	tempAttackBuff += amount;
-	std::cout << "공격력이 +" << amount << " 증가했습니다!(공격력: " << attack + tempAttackBuff << ")\n";
+	std::cout << " → " << attack + tempAttackBuff << ")\n";
 }
 
 void Player::addTempCriticalProbability(int amount)
 {
 	// std::cout << "[FOR DEBUG : Player.cpp > addTempCriticalProbability]\n";
+	std::cout << "치명타 확률이 +" << amount << " 증가했습니다!(치명타 확률: " << criticalProbability + tempCriticalProbability;
 	tempCriticalProbability += amount;
-	std::cout << "치명타 확률이 +" << amount << " 증가했습니다!(치명타 확률: " << criticalProbability + tempCriticalProbability << ")\n";
+	std::cout << " → " << criticalProbability + tempCriticalProbability << ")\n";
 }
 
 void Player::removeItemByIdx(int idx)

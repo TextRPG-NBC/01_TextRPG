@@ -9,8 +9,9 @@ namespace Constants {
 	constexpr int MAX_DROP_GOLD = 20;
 	constexpr int DROP_EXP = 50;
 	constexpr float SELL_RATE = 0.6f;
+	constexpr float BOSS_STATUS_RATE = 1.5f;
 
-	// 문자열 상수 : C++14는 inline 지원 X, cpp 파일에서 정의 필요
+	// 문자열 상수 : C++14는 inline 변수 지원 X, cpp 파일에서 정의 필요
 
 
 	// --- enum 정의 ---
@@ -36,12 +37,8 @@ namespace Constants {
 	enum MonsterStatus {
 		NM_MIN_HP_RATE = 20,
 		NM_MAX_HP_RATE = 30,
-		BS_MIN_HP_RATE = 30,
-		BS_MAX_HP_RATE = 45,
 		NM_MIN_ATK_RATE = 5,
 		NM_MAX_ATK_RATE = 10,
-		BS_MIN_ATK_RATE = 8,
-		BS_MAX_ATK_RATE = 15,
 	};
 
 	enum PlayerStatus {

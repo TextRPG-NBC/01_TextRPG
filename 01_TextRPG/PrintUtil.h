@@ -15,7 +15,7 @@ namespace PrintUtil {
 
 	inline void printGameOver()
 	{
-		std::cout << "\n==========[  Game Over  ]==========\n";
+		std::cout << "\n====================[  Game Over  ]=======================\n";
 	}
 
 	inline void printShopMenu()
