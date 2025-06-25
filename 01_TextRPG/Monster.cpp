@@ -7,7 +7,16 @@
 
 
 Monster::Monster(const std::string& name, int level, int hp, int attack, bool isBoss)
-	: name(name), level(level), maxHP(hp), curHP(hp), attack(attack), isBoss(isBoss){}
+	: name(name), level(level), maxHP(hp), curHP(hp), attack(attack), isBoss(isBoss){
+	if (isBoss)
+	{
+		std::cout << "[보스 몬스터 생성] : ";
+	}
+	else {
+		std::cout << "[몬스터 생성] : ";
+	}
+	std::cout << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
+}
 
 void Monster::takeDamage(int damage)
 {
@@ -91,7 +100,7 @@ Goblin::Goblin(int playerLevel)
 		playerLevel * RandomUtil::getInt(Constants::NM_MIN_HP_RATE, Constants::NM_MAX_HP_RATE),
 		playerLevel * RandomUtil::getInt(Constants::NM_MIN_ATK_RATE, Constants::NM_MIN_ATK_RATE), false)
 {
-	std::cout << "[몬스터 생성] : \""<< name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
+	//std::cout << "[몬스터 생성] : \""<< name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
 }
 
 Orc::Orc(int playerLevel)					
@@ -99,7 +108,7 @@ Orc::Orc(int playerLevel)
 		playerLevel* RandomUtil::getInt(Constants::NM_MIN_HP_RATE, Constants::NM_MAX_HP_RATE),
 		playerLevel* RandomUtil::getInt(Constants::NM_MIN_ATK_RATE, Constants::NM_MIN_ATK_RATE), false)
 {
-	std::cout << "[몬스터 생성] : \"" << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
+	//std::cout << "[몬스터 생성] : \"" << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
 }
 
 Troll::Troll(int playerLevel)
@@ -107,7 +116,7 @@ Troll::Troll(int playerLevel)
 		playerLevel* RandomUtil::getInt(Constants::NM_MIN_HP_RATE, Constants::NM_MAX_HP_RATE),
 		playerLevel* RandomUtil::getInt(Constants::NM_MIN_ATK_RATE, Constants::NM_MIN_ATK_RATE), false)
 {
-	std::cout << "[몬스터 생성] : \"" << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
+	//std::cout << "[몬스터 생성] : \"" << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
 }
 
 BossMonster::BossMonster(int playerLevel)	
@@ -115,5 +124,5 @@ BossMonster::BossMonster(int playerLevel)
 		playerLevel* RandomUtil::getInt(Constants::BS_MIN_HP_RATE, Constants::BS_MAX_HP_RATE),
 		playerLevel* RandomUtil::getInt(Constants::BS_MIN_ATK_RATE, Constants::BS_MIN_ATK_RATE), true)
 {
-	std::cout << "[보스 몬스터 생성] : \"" << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
+	//std::cout << "[보스 몬스터 생성] : \"" << name << "\" 등장!(체력: " << curHP << ", 공격력 : " << attack << ")\n";
 }
