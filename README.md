@@ -17,7 +17,7 @@
 - **빌드버전:** C++14, Visual Studio 2022(17.14)
 
 ---
-🔗🍀🖼️
+
 ## 🛝 구상도 및 흐름
 ![image](https://github.com/user-attachments/assets/c143e03b-d7ba-424a-9270-8e9c0ebdf78c)
 --
@@ -59,6 +59,7 @@
 **TODO: 발표자료 링크 첨부**
 
 ---
+
 ## 🌟 주요 기능
 > 직관적 CLI 기반 RPG
 > * 플레이어 상태/전투/레벨업/상점/인벤토리 등 RPG의 핵심 요소 구현
