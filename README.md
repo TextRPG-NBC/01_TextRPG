@@ -58,8 +58,10 @@
 ---
 
 ## 🎥 데모(Demo) 영상
-**[Youtube Link](https://www.youtube.com/watch?v=jYlGAG_jHOo)**
+**[Demo](https://www.youtube.com/watch?v=jYlGAG_jHOo)**
+
 **[발표](https://youtu.be/2q0Kg_Yu5FI)**
+
 **[PPT](https://docs.google.com/presentation/d/1x9uD6DWPtJpsoGKQqj7YxscncOWUlHnvtQ0wtwAtt4E/edit?usp=sharing)**
 
 ---
